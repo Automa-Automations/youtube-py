@@ -1,8 +1,9 @@
 import undetected_chromedriver as uc
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from utils import find_element
+from utils import find_element, scroll_to_bottom, convert_to_absolute_path
 from dotenv import load_dotenv
+import os
 
 def create_channel(
     channel_name: str,
@@ -18,6 +19,12 @@ def create_channel(
 ):
     # Global variables for function
     youtube_url = "https://youtube.com"
+
+    # Convert picture paths to absolute paths
+    profile_picture_path = convert_to_absolute_path(profile_picture_path)
+    banner_picture_path = convert_to_absolute_path(banner_picture_path)
+    watermark_picture_path = convert_to_absolute_path(watermark_picture_path)
+    if not os.path.isabs(watermark_picture_path): watermark_picture_path = os.path.abspath(watermark_picture_path)
 
     # 1. TODO: Navigate to youtube and sign in to google.
     # Instantiate driver
@@ -125,6 +132,24 @@ def create_channel(
     contact_email_input.send_keys(contact_email_path)
 
     # 5. TODO: Upload thumbnail, banner, watermark
+
+    # Switch to the 'Branding' tab
+    branding_navigation_button = find_element(driver, By.XPATH, "//ytcp-ve[span[contains(text(), 'Branding')]]")
+    branding_navigation_button.click()
+    
+    thumbnail_upload_file_input = find_element(driver, By.XPATH, "/html/body/ytcp-app/ytcp-entity-page/div/div/main/div/ytcp-animatable[6]/ytcp-channel-editing-section/iron-pages/div[2]/ytcp-channel-editing-images-tab/div/section[1]/ytcp-profile-image-upload/div/div[3]/div[2]/div[2]/input")
+
+    # Upload the thumbnail
+    thumbnail_upload_file_input.send_keys(profile_picture_path)
+
+    banner_upload_file_input = find_element(driver, By.XPATH, "/html/body/ytcp-app/ytcp-entity-page/div/div/main/div/ytcp-animatable[6]/ytcp-channel-editing-section/iron-pages/div[2]/ytcp-channel-editing-images-tab/div/section[2]/ytcp-banner-upload/div/div[3]/div[2]/div[2]/input")
+
+    # Upload banner
+    banner_upload_file_input.send_keys(banner_picture_path)
+
+    # scroll to bottom
+
+
     # 6. TODO: Save Youtube Channel.
     # 7. TODO: Return channel ID, success message, and cookies.
 
