@@ -37,8 +37,7 @@ def create_channel(
         sign_in_with_google_link = find_element(driver, By.CSS_SELECTOR, "a[href*='https://accounts.google.com/ServiceLogin']")
         link = sign_in_with_google_link.get_attribute("href")
 
-        if link is None:
-            raise Exception("Could not find sign in with google link.")
+        if link is None: raise Exception("Could not find sign in with google link.")
         driver.get(link)
         
         print("5. Signing in with google...")
