@@ -1,7 +1,7 @@
 import undetected_chromedriver as uc
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from utils import find_element, scroll_to_bottom, sign_into_youtube_channel
+from utils import find_element, scroll_to_bottom, sign_into_youtube_channel, set_element_innertext
 import time
 
 def create_channel(
@@ -71,7 +71,7 @@ def create_channel(
         channel_handle_input.send_keys(channel_handle)
 
         channel_description_input = find_element(driver, By.CSS_SELECTOR, "div[aria-label='Tell viewers about your channel. Your description will appear in the About section of your channel and search results, among other places.']")
-        driver.execute_script("arguments[0].innerText = arguments[1];", channel_description_input, channel_description)
+        set_element_innertext(driver, channel_description_input, channel_description)
 
         print("7. Filling in contact channel links...")
         scroll_to_bottom(driver)

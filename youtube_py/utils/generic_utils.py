@@ -12,3 +12,7 @@ def find_element(driver, by, value, timeout=10):
 # Simple function to scroll to bottom of screen.
 def scroll_to_bottom(driver):
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+def set_element_innertext(driver, element, text):
+    driver.execute_script("arguments[0].innerText = arguments[1];", element, text)
+
