@@ -1,5 +1,5 @@
 from typing import Optional
-import channel
+import youtube 
 
 class YoutubeClass:
     def __init__(
@@ -27,7 +27,7 @@ class YoutubeClass:
         contact_email_path: str,
         links: list,
     ):
-        channel.create_channel(
+        youtube.create_channel(
             channel_name,
             channel_handle,
             channel_description,

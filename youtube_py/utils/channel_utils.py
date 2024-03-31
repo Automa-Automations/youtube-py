@@ -9,9 +9,9 @@ def sign_into_youtube_channel(
     email: Optional[str] = None,
     password: Optional[str] = None, 
     cookies: Optional[str] = None,
-    chromium_driver_absolute_path: Optional[str] = None
+    absolute_chromium_profile_path: Optional[str] = None
 ):
-    if not email and not password and not cookies and not chromium_driver_absolute_path:
+    if not email and not password and not cookies and not absolute_chromium_profile_path:
         raise Exception("You must provide either an email and password, chromium driver path, or cookies.")
 
     driver.get("https://youtube.com")
@@ -23,8 +23,8 @@ def sign_into_youtube_channel(
             driver.refresh()
             return driver
         
-        elif chromium_driver_absolute_path:
-            driver = uc.Chrome(chromium_driver_absolute_path)
+        elif absolute_chromium_profile_path:
+            driver = uc.Chrome(absolute_chromium_profile_path)
             driver.get("https://youtube.com")
             return driver
 

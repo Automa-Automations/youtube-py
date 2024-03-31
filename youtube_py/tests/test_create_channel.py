@@ -1,6 +1,6 @@
 import unittest
 import os
-from channel import create_channel
+from youtube import create_channel
 from dotenv import load_dotenv
 
 load_dotenv()
