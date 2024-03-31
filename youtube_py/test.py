@@ -5,7 +5,6 @@ tests = {
     "test_create_channel": TestCreateChannel
 }
 
-
 def main():
     for index, test in enumerate(tests):
         print(f"{index+1}. {test}")
