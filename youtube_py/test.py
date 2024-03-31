@@ -1,8 +1,9 @@
-from tests import TestCreateChannel
+from tests import TestCreateChannel, TestCreateVideo
 import unittest
 
 tests = {
-    "test_create_channel": TestCreateChannel
+    "test_create_channel": TestCreateChannel,
+    "test_create_video": TestCreateVideo,
 }
 
 def main():

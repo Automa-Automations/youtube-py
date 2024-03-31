@@ -1,18 +1,9 @@
 from typing import Optional
 import youtube 
+from dataclasses import dataclass
 
+@dataclass
 class YoutubeClass:
-    def __init__(
-        self,
-        channel_cookies: Optional[str] = None,
-        email: Optional[str] = None,
-        password: Optional[str] = None,
-        chrome_driver_path: Optional[str] = None,
-    ):
-        self.channel_cookies = channel_cookies
-        self.email = email
-        self.password = password
-        self.chrome_driver_path = chrome_driver_path
     
     def create_channel(
         self, 
@@ -38,4 +29,19 @@ class YoutubeClass:
             watermark_picture_path,
             contact_email_path,
             links
+        )
+    def create_video(
+        self,
+        absolute_video_path: str,
+        email: Optional[str] = None,
+        password: Optional[str] = None,
+        cookies: Optional[str] = None,
+        absolute_chromium_profile_path: Optional[str] = None,
+    ):
+        youtube.create_video(
+            absolute_video_path,
+            email,
+            password,
+            cookies,
+            absolute_chromium_profile_path,
         )
