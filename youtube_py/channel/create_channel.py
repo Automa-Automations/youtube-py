@@ -34,9 +34,10 @@ def create_channel(
 
         if link is None: 
             raise Exception("Could not find sign in with google link.")
+
         driver.get(link)
        
-        print("4. Entering email...")
+        print("4. Entering email and password...")
         email_input = find_element(driver, By.CSS_SELECTOR, "input[type='email']")
         email_input.click()
         email_input.send_keys(email)
@@ -76,8 +77,6 @@ def create_channel(
                 break
 
         print("7. Navigating to basic info tab...")
-
-        # Navigating to basic info 
         driver.get(f"https://studio.youtube.com/channel/{channel_id}/editing/details")
 
         # If Welcome to Youtube Studio popup opens:
@@ -104,7 +103,7 @@ def create_channel(
         driver.execute_script("arguments[0].innerText = arguments[1];", channel_description_input, channel_description)
 
         print("9. Filling in contact channel links...")
-        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        scroll_to_bottom(driver)
 
         for i, link in enumerate(links):
             print(f"[{i+1}] Adding link...")
@@ -132,9 +131,8 @@ def create_channel(
                     url_input.click()
                     url_input.send_keys(link['url'])
 
-        # Scroll to bottom
-        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        
+        scroll_to_bottom(driver)
+    
         print("10. Filling in contact email...")
         contact_email_input = find_element(driver, By.CSS_SELECTOR, 'input[placeholder="Email address"]')
         contact_email_input.click()
@@ -156,6 +154,7 @@ def create_channel(
         banner_upload_file_input.send_keys(banner_picture_path)
         done_button = find_element(driver, By.XPATH, "/html/body/ytcp-banner-editor/ytcp-dialog/tp-yt-paper-dialog/div[3]/div/ytcp-button[2]")
         done_button.click()
+
         # scroll to bottom
         scroll_to_bottom(driver)
 
