@@ -1,0 +1,26 @@
+Message: element click intercepted: Element <ytcp-button id="publish-button" track-click="" type="filled" class="style-scope ytcp-channel-editing-section" tabindex="-1" icon-alignment="start" aria-disabled="true" role="button" aria-describedby="goog_1020770167 goog_1020770168" disabled="">...</ytcp-button> is not clickable at point (1263, 95). Other element would receive the click: <tp-yt-iron-overlay-backdrop class="opened" opened="" style="opacity: 0; z-index: 2205;">...</tp-yt-iron-overlay-backdrop>
+  (Session info: chrome=123.0.6312.58)
+Stacktrace:
+#0 0x622d4004d8a3 <unknown>
+#1 0x622d3fd438c6 <unknown>
+#2 0x622d3fd95233 <unknown>
+#3 0x622d3fd9314e <unknown>
+#4 0x622d3fd90b27 <unknown>
+#5 0x622d3fd8fed3 <unknown>
+#6 0x622d3fd83507 <unknown>
+#7 0x622d3fdb05a2 <unknown>
+#8 0x622d3fd82e98 <unknown>
+#9 0x622d3fdb076e <unknown>
+#10 0x622d3fdcec19 <unknown>
+#11 0x622d3fdb0343 <unknown>
+#12 0x622d3fd81593 <unknown>
+#13 0x622d3fd81f5e <unknown>
+#14 0x622d4001188b <unknown>
+#15 0x622d400157e5 <unknown>
+#16 0x622d3ffff5b1 <unknown>
+#17 0x622d40016372 <unknown>
+#18 0x622d3ffe48bf <unknown>
+#19 0x622d4003c768 <unknown>
+#20 0x622d4003c93b <unknown>
+#21 0x622d4004c9f4 <unknown>
+#22 0x75471e03155a <unknown>

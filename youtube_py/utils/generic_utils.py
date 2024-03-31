@@ -10,9 +10,3 @@ def find_element(driver, by, value, timeout=10):
 
 def scroll_to_bottom(driver):
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-
-def convert_to_absolute_path(path):
-    if not os.path.isabs(path):
-        absolute_path = os.path.abspath(path)
-        return absolute_path
-    return path
