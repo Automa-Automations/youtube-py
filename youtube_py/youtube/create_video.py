@@ -1,5 +1,6 @@
 from typing import Optional
 import undetected_chromedriver as uc
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from utils import sign_into_youtube_channel, find_element, set_element_innertext
 import time
@@ -44,15 +45,23 @@ def create_video(
         
         # Input title and description of video
         title_input = find_element(driver, By.CSS_SELECTOR, "div[aria-label='Add a title that describes your video (type @ to mention a channel)']")
-        set_element_innertext(driver, title_input, video_title)
+        # set_element_innertext(driver, title_input, video_title)
+        title_input.click()
+        title_input.send_keys(Keys.CONTROL + "a")
+        title_input.send_keys(Keys.DELETE)
+        title_input.send_keys(video_title)
 
         description_input = find_element(driver, By.CSS_SELECTOR, "div[aria-label='Tell viewers about your video (type @ to mention a channel)']")
-        set_element_innertext(driver, description_input, video_description)
+        description_input.click()
+        description_input.send_keys(Keys.CONTROL + "a")
+        description_input.send_keys(Keys.DELETE)
+        description_input.send_keys(video_description)
 
         # Upload thumbnail if video thumbnail is specified
         if video_thumbnail_absolute_path:
-            thumbnail_input = find_element(driver, By.CSS_SELECTOR, "input['type=file']")
+            thumbnail_input = find_element(driver, By.CSS_SELECTOR, "input[type='file']")
             thumbnail_input.send_keys(video_thumbnail_absolute_path)
+            time.sleep(10)
 
         not_for_kids_radio = find_element(driver, By.CSS_SELECTOR , "tp-yt-paper-radio-button[name='VIDEO_MADE_FOR_KIDS_NOT_MFK']", 100)
         not_for_kids_radio.click()
@@ -75,6 +84,7 @@ def create_video(
             date_input.clear()
             date_input.click()
             date_input.send_keys(video_schedule_date)
+            date_input.send_keys(Keys.ENTER)
 
             time_toggle_menu = find_element(driver, By.XPATH, "/html/body/ytcp-uploads-dialog/tp-yt-paper-dialog/div/ytcp-animatable[1]/ytcp-uploads-review/div[2]/div[1]/ytcp-video-visibility-select/div[3]/div[2]/ytcp-visibility-scheduler/div[1]/ytcp-datetime-picker/div/div[2]/form/ytcp-form-input-container/div[1]/div/tp-yt-paper-input/tp-yt-paper-input-container/div[2]/div/iron-input/input")
             time_toggle_menu.click()
@@ -82,7 +92,7 @@ def create_video(
             time_menu = find_element(driver, By.XPATH, "/html/body/ytcp-time-of-day-picker/tp-yt-paper-dialog/tp-yt-paper-listbox")
             # Look through all the children of the time menu (tp-yt-paper-item), and select the one with the same text as the time input.
             for child in time_menu.find_elements(By.CSS_SELECTOR, "tp-yt-paper-item"):
-                if child.text == video_schedule_time:
+                if child.text == video_schedule_time.replace(" ", " "):
                     child.click()
                     break
 
@@ -131,11 +141,16 @@ def create_video(
         # Quit driver
         driver.quit()
 
-        return {
+        return_dict = {
             "status": "success",
             "channel_id": channel_id,
             "video_id": video_id,
         }
+
+        print(return_dict)
+
+        return return_dict
+        
 
     except Exception as e:
         print('Error:', e)
