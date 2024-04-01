@@ -116,6 +116,7 @@ class YoutubeClass:
         self, 
         community_post_title: str,
         community_post_configuration_object: dict,
+        schedule: Optional[dict] = None,
         email: Optional[str] = None,
         password: Optional[str] = None,
         cookies: Optional[str] = None,
@@ -126,13 +127,6 @@ class YoutubeClass:
 
         Parameters:
         - community_post_title (str): title of the community post.
-        - schedule (Optional[object]): time to schedule the post.
-            The schedule object must follow the example below:
-            {
-                "date": "Apr 5, 2024",
-                "time": "6:45 PM" # Only 15 minute increments (hour:0, hour:15, hour: 30, hour: 45)
-                "GMT_timezone": "GMT+11" # Timezone of the schedule (GMT only)
-            }
         - community_post_configuration_object (dict): configuration object of the community post.
             The communication_post_configuration must follow one of the examples below: 
             - Example 1: Simple Text Post:
@@ -142,7 +136,11 @@ class YoutubeClass:
             - Example 2: Image with Text Post:
             {
                 "type": "image",
-                "image_absolute_path": "path/to/image.jpg",
+                "images_absolute_path": [
+                    "path/to/image.jpg",
+                    "path/to/image.jpg",
+                    ... # (Up to 5 images max, GIFs are allowd as well)
+                ], # If you only want to upload one image, you can just provide a string instead of a list.
             }
             - Example 3: Image Poll Post:
             {
@@ -166,9 +164,31 @@ class YoutubeClass:
             {
                 "type": "quiz",
                 "options": [
-                    "Answer 1", "Answer 2", "Answer 3", ...
+                    {
+                        "text": "Answer 1",
+                        "reason_answer": "Reason for answer 1", # This means that this is the correct answer. There may only be one correct answer
+                    },
+                    {
+                        "text": "Answer 2", # Incorrect answer 
+                    },
+                    {
+                        "text": "Answer 2", # Incorrect answer 
+                    },
+                    ...
                 ],
             }
+        - schedule (Optional[dict]): time to schedule the post.
+            The schedule object must follow the example below:
+            {
+                "date": "Apr 5, 2024",
+                "time": "6:45 PM" # Only 15 minute increments (hour:0, hour:15, hour: 30, hour: 45)
+                "GMT_timezone": "GMT+11" # Timezone of the schedule (GMT only)
+            }
+        - email (Optional[str]): email of the Youtube account.
+        - password (Optional[str]): password of the Youtube account.
+        cookies (Optional[str]): cookies of the Youtube account
+        absolute_chromium_profile_path (Optional[str]): absolute path of the chromium profile to be used in the process. 
+
         Returns:
         - example success return object: {
             "status": "success", 
@@ -183,6 +203,7 @@ class YoutubeClass:
         youtube.create_community_post(
             community_post_title,
             community_post_configuration_object,
+            schedule,
             email,
             password,
             cookies,
