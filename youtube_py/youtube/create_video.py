@@ -1,8 +1,7 @@
 from typing import Optional
-import undetected_chromedriver as uc
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from utils import sign_into_youtube_channel, find_element, set_element_innertext
+from utils import sign_into_youtube_channel, find_element, new_driver
 import time
 
 def create_video(
@@ -22,10 +21,7 @@ def create_video(
         raise ValueError("You need to provide either cookies, chromium profile path, or email and password")
 
     print("1. Starting the browser...")
-    options = uc.ChromeOptions()
-    options.add_argument("--disable-notifications")  # Disable notifications
-    options.add_argument("--disable-popup-blocking")  # Disable popup blocking
-    driver = uc.Chrome(options=options)
+    driver = new_driver()
 
     try: 
         print("2. Signing into the youtube channel...")
@@ -150,6 +146,7 @@ def create_video(
             "status": "success",
             "channel_id": channel_id,
             "video_id": video_id,
+            "message": "Video uploaded successfully",
         }
 
         print(return_dict)
@@ -164,5 +161,6 @@ def create_video(
 
         return {
             "status": "error",
-            "message": str(e),
+            "message": "An error occurred while uploading video.",
+            "error": str(e),
         }

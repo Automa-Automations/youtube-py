@@ -35,6 +35,7 @@ class YoutubeClass:
         
         Returns:
         - example success return object: {
+            "status": "success",
             "channel_id": channel_id, 
             "message": "Channel created successfully", 
             "cookies": driver.get_cookies()
@@ -42,6 +43,7 @@ class YoutubeClass:
         - example error return object: {
             "status": "error",
             "message": "An error occurred while creating channel."
+            "error": error_message
         }
         """
 
@@ -90,10 +92,12 @@ class YoutubeClass:
             "status": "success",
             "channel_id": channel_id,
             "video_id": video_id,
+            "message": "Video uploaded successfully",
         }
         - example error return object: {
             "status": "error",
-            "message": str(e),
+            "message": "An error occurred while uploading video.",
+            "error": error_message
         }
         """
         youtube.create_video(
@@ -108,3 +112,80 @@ class YoutubeClass:
             cookies,
             absolute_chromium_profile_path,
         )
+    def create_community_post(
+        self, 
+        community_post_title: str,
+        community_post_configuration_object: dict,
+        email: Optional[str] = None,
+        password: Optional[str] = None,
+        cookies: Optional[str] = None,
+        absolute_chromium_profile_path: Optional[str] = None,
+    ):
+        """
+        Function to create a community post on a Youtube channel.
+
+        Parameters:
+        - community_post_title (str): title of the community post.
+        - schedule (Optional[object]): time to schedule the post.
+            The schedule object must follow the example below:
+            {
+                "date": "Apr 5, 2024",
+                "time": "6:45 PM" # Only 15 minute increments (hour:0, hour:15, hour: 30, hour: 45)
+                "GMT_timezone": "GMT+11" # Timezone of the schedule (GMT only)
+            }
+        - community_post_configuration_object (dict): configuration object of the community post.
+            The communication_post_configuration must follow one of the examples below: 
+            - Example 1: Simple Text Post:
+            {
+                "type": "text",
+            }
+            - Example 2: Image with Text Post:
+            {
+                "type": "image",
+                "image_absolute_path": "path/to/image.jpg",
+            }
+            - Example 3: Image Poll Post:
+            {
+                "type": "image_poll",
+                "options": [
+                    {
+                        "text": "Option 1",
+                        "image_absolute_path": "path/to/image1.jpg"
+                    },
+                    ...
+                ]
+            }
+            - Example 4: Text Poll Post:
+            {
+                "type": "text_poll",
+                "options": [
+                    "Option 1", "Option 2", "Option 3", ...
+                ],
+            }
+            - Example 5: Quiz Post:
+            {
+                "type": "quiz",
+                "options": [
+                    "Answer 1", "Answer 2", "Answer 3", ...
+                ],
+            }
+        Returns:
+        - example success return object: {
+            "status": "success", 
+            "message": "Community post created successfully", 
+        }
+        - example error return object: {
+            "status": "error",
+            "message": "An error occurred while creating community post."
+            "error": error_message
+        }
+        """
+        youtube.create_community_post(
+            community_post_title,
+            community_post_configuration_object,
+            email,
+            password,
+            cookies,
+            absolute_chromium_profile_path,
+        )
+

@@ -1,7 +1,6 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import os
+import undetected_chromedriver as uc
 
 # Short function to find element, using webdriver wait
 def find_element(driver, by, value, timeout=10):
@@ -15,4 +14,11 @@ def scroll_to_bottom(driver):
 
 def set_element_innertext(driver, element, text):
     driver.execute_script("arguments[0].innerText = arguments[1];", element, text)
+
+def new_driver():
+    options = uc.ChromeOptions()
+    options.add_argument("--disable-notifications")  # Disable notifications
+    options.add_argument("--disable-popup-blocking")  # Disable popup blocking
+    driver = uc.Chrome(options=options)
+    return driver
 
