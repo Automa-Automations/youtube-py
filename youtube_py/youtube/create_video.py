@@ -6,11 +6,10 @@ from utils import sign_into_youtube_channel, find_element, set_element_innertext
 import time
 
 def create_video(
-
     absolute_video_path: str,
     video_title: str,
     video_description: str,
-    video_thumbnail_absolute_path: str,
+    video_thumbnail_absolute_path: Optional[str] = None,
     video_schedule_date: Optional[str] = None,
     video_schedule_time: Optional[str] = None,
     email: Optional[str] = None,

@@ -18,6 +18,33 @@ class YoutubeClass:
         contact_email_path: str,
         links: list,
     ):
+        """
+        Function to create a Youtube channel. 
+
+        Parameters:
+        channel_name (str): name of the channel.
+        channel_handle (str): channel handle/username.
+        channel_description (str): description of the channel.
+        email (str): email of the Youtube account.
+        password (str): password of the Youtube account.
+        profile_picture_path (str): path of the profile picture of the channel.
+        banner_picture_path (str): path of the banner picture of the channel.
+        watermark_picture_path (str): path of the watermark picture of the channel.
+        contact_email_path (str): path of the contact email of the channel.
+        links (list): list of links to be added to the channel.
+        
+        Returns:
+        - example success return object: {
+            "channel_id": channel_id, 
+            "message": "Channel created successfully", 
+            "cookies": driver.get_cookies()
+        }
+        - example error return object: {
+            "status": "error",
+            "message": "An error occurred while creating channel."
+        }
+        """
+
         youtube.create_channel(
             channel_name,
             channel_handle,
@@ -33,13 +60,49 @@ class YoutubeClass:
     def create_video(
         self,
         absolute_video_path: str,
+        video_title: str,
+        video_description: str,
+        video_thumbnail_absolute_path: Optional[str] = None,
+        video_schedule_date: Optional[str] = None,
+        video_schedule_time: Optional[str] = None,
         email: Optional[str] = None,
         password: Optional[str] = None,
         cookies: Optional[str] = None,
         absolute_chromium_profile_path: Optional[str] = None,
     ):
+        """
+        Function to upload a video to a Youtube channel. 
+
+        Parameters:
+        - absolute_video_path (str): absolute path of video to be uploaded.
+        - video_title (str): title of the video.
+        - video_description (str): description of the video.
+        - video_thumbnail_absolute_path (Optional[str]): absolute path of the thumbnail of the video.
+        - video_schedule_date (Optional[str] -> format: 'Apr 5, 2024'): date to schedule the video.
+        - video_schedule_time (Optional[str] -> format: '6:45 PM'): time to schedule the video.
+        - email (Optional[str]): email of the Youtube account.
+        - password (Optional[str]): password of the Youtube account.
+        - cookies: (Optional[str]): cookies of the Youtube account
+        - absolute_chromium_profile_path (Optional[str]): absolute path of the chromium profile to be used in the process. 
+        
+        Returns:
+        - example success return object: {
+            "status": "success",
+            "channel_id": channel_id,
+            "video_id": video_id,
+        }
+        - example error return object: {
+            "status": "error",
+            "message": str(e),
+        }
+        """
         youtube.create_video(
             absolute_video_path,
+            video_title,
+            video_description,
+            video_thumbnail_absolute_path,
+            video_schedule_date,
+            video_schedule_time,
             email,
             password,
             cookies,

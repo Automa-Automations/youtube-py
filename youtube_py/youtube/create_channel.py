@@ -160,4 +160,7 @@ def create_channel(
 
         if driver:
             driver.quit()
-        return {"message": "An error occurred while creating channel."}
+        return {
+            "status": "error",
+            "message": "An error occurred while creating channel."
+        }
