@@ -193,8 +193,79 @@ def create_community_post(
                     real_answer_input.send_keys(option["reason_answer"])
 
 
-        # elif community_post_configuration_object['type'] not "text":
-        #     raise ValueError("Invalid community post configuration object")
+        elif community_post_configuration_object['type'] != "text":
+            raise ValueError("Invalid community post configuration object")
+
+        if schedule:
+            print(f"5. Scheduling post for {schedule['date']} at {schedule['time']} in {schedule['GMT_timezone']} timezone...")
+
+            # Arrow down button next to post button.
+            print("5.1. Clicking on post additional options button...")
+            post_additional_options_button = find_element(driver, By.CSS_SELECTOR, "button=[class='yt-spec-button-shape-next yt-spec-button-shape-next--filled yt-spec-button-shape-next--call-to-action yt-spec-button-shape-next--size-m yt-spec-button-shape-next--icon-button yt-spec-button-shape-next--segmented-end']")
+            post_additional_options_button.click()
+
+            print("5.2. Clicking on schedule post menu opener button...")
+            schedule_post_menu_opener_button = find_element(driver, By.CSS_SELECTOR, "ytd-menu-service-item-renderer")
+            schedule_post_menu_opener_button.click()
+            
+            print("5.3. Clicking on date picker button...")
+            date_picker = find_element(driver, By.CSS_SELECTOR, "tp-yt-paper-button[id='date-picker']")
+            date_picker.click()
+
+            print("5.4. Inputting date...")
+            date_input = find_element(driver, By.CSS_SELECTOR, "input[id='textbox']") 
+            date_input.click()
+            date_input.send_keys(Keys.CONTROL + "a")
+            date_input.send_keys(Keys.DELETE)
+            date_input.send_keys(schedule["date"])
+            date_input.send_keys(Keys.ENTER)
+
+            print("5.5. Clicking on time picker button...")
+            time_picker = find_element(driver, By.CSS_SELECTOR, "tp-yt-paper-button[id='time-picker']")
+            time_picker.click()
+
+            print("5.6. Selecting time...")
+            time_listbox = find_element(driver, By.CSS_SELECTOR, "tp-yt-paper-listbox[id='time-listbox']")
+            # Get all the tp-yt-paper-item in the time_listbox.
+            all_times = time_listbox.find_elements(By.CSS_SELECTOR, "tp-yt-paper-item")
+            
+            for time in all_times:
+                if time.text.strip() == schedule["time"].replace(" ", " "):
+                    time.click()
+                    break
+
+            print("5.7. Selecting timezone...")
+            timezone_picker = find_element(driver, By.CSS_SELECTOR, "tp-yt-paper-button[id='timezone-picker']")
+            timezone_picker.click()
+
+            timezone_listbox = find_element(driver, By.CSS_SELECTOR, "tp-yt-paper-listbox[id='timezone-listbox']")
+            all_timezones_items = timezone_listbox.find_elements(By.CSS_SELECTOR, "tp-yt-paper-item")
+
+            for timezone_list_item in all_timezones_items:
+                timezone_GMT_format = timezone_list_item.text.strip().split("(")[1].split(")")[0]
+
+                if timezone_GMT_format == schedule["GMT_timezone"]:
+                    timezone_list_item.click()
+                    break
+
+            print("5.8. Clicking on schedule button...")
+            schedule_button = find_element(driver, By.CSS_SELECTOR, "button[aria-label='Schedule']")
+            schedule_button.click()
+
+            try:
+                print("5.9. Clicking on Got it button...")
+                got_it_button = find_element(driver, By.CSS_SELECTOR, "button[aria-label='Got it']")
+                got_it_button.click()
+
+                schedule_button = find_element(driver, By.CSS_SELECTOR, "button[aria-label='Schedule']")
+                schedule_button.click()
+            except:
+                print("Not needed to click on Got it button.")
+
+        else:
+            print("5. Posting community post...")
+            post_button = find_element(driver, By.CSS_SELECTOR, "ytd-button-renderer[id='submit-button']")
+            post_button.click()
         driver.quit()
 
 
