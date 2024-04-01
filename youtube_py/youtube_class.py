@@ -181,7 +181,7 @@ class YoutubeClass:
             The schedule object must follow the example below:
             {
                 "date": "Apr 5, 2024",
-                "time": "6:45 PM" # Only 15 minute increments (hour:0, hour:15, hour: 30, hour: 45)
+                "time": "6:45 PM", # Only 15 minute increments (hour:0, hour:15, hour: 30, hour: 45)
                 "GMT_timezone": "GMT+11" # Timezone of the schedule (GMT only)
             }
         - email (Optional[str]): email of the Youtube account.

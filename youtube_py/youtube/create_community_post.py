@@ -266,8 +266,12 @@ def create_community_post(
             print("5. Posting community post...")
             post_button = find_element(driver, By.CSS_SELECTOR, "ytd-button-renderer[id='submit-button']")
             post_button.click()
-        driver.quit()
 
+        driver.quit()
+        return {
+            "status": "success", 
+            "message": "Community post created successfully", 
+        }
 
     except Exception as e:
         print('Error:', e)
