@@ -30,7 +30,7 @@ def create_video(
     try: 
         print("2. Signing into the youtube channel...")
         driver = sign_into_youtube_channel(driver, cookies=cookies, email=email, password=password, absolute_chromium_profile_path=absolute_chromium_profile_path)
-
+ 
         if not driver:
             raise Exception("Could not sign into youtube channel.")
         
@@ -42,6 +42,7 @@ def create_video(
         upload_video_input = find_element(driver, By.CSS_SELECTOR, "input[type='file']")
         upload_video_input.send_keys(absolute_video_path)
         
+        print(f"4.1. Adding video title '{video_title}'...")
         # Input title and description of video
         title_input = find_element(driver, By.CSS_SELECTOR, "div[aria-label='Add a title that describes your video (type @ to mention a channel)']")
         # set_element_innertext(driver, title_input, video_title)
@@ -49,7 +50,8 @@ def create_video(
         title_input.send_keys(Keys.CONTROL + "a")
         title_input.send_keys(Keys.DELETE)
         title_input.send_keys(video_title)
-
+        
+        print(f"4.2. Adding video description '{video_description}'...")
         description_input = find_element(driver, By.CSS_SELECTOR, "div[aria-label='Tell viewers about your video (type @ to mention a channel)']")
         description_input.click()
         description_input.send_keys(Keys.CONTROL + "a")
@@ -58,13 +60,16 @@ def create_video(
 
         # Upload thumbnail if video thumbnail is specified
         if video_thumbnail_absolute_path:
+            print("Uploading video thumbnail...")
             thumbnail_input = find_element(driver, By.CSS_SELECTOR, "input[type='file']")
             thumbnail_input.send_keys(video_thumbnail_absolute_path)
             time.sleep(10)
-
+        
+        print("4.3. Setting video visibility to 'Not Made for Kids'...")
         not_for_kids_radio = find_element(driver, By.CSS_SELECTOR , "tp-yt-paper-radio-button[name='VIDEO_MADE_FOR_KIDS_NOT_MFK']", 100)
         not_for_kids_radio.click()
 
+        print(f"4.4. Setting video visibility to 'Public'...")
         visibility_tab = find_element(driver, By.CSS_SELECTOR, "button[id='step-badge-3']")
         visibility_tab.click()
 
@@ -73,6 +78,7 @@ def create_video(
 
         # Schedule video if schedule time is specified
         if video_schedule_date and video_schedule_time:
+            print(f"4.5. Scheduling video for {video_schedule_date} at {video_schedule_time}...")
             schedule_dropdown_button = find_element(driver, By.CSS_SELECTOR, "ytcp-icon-button[id='second-container-expand-button']")
             schedule_dropdown_button.click()
        
@@ -135,8 +141,8 @@ def create_video(
 
         if video_href:
             video_id = video_href.split("video/")[1].split("/")[0]
+
         print("8. Video uploaded successfully! Quitting driver")
-        
         # Quit driver
         driver.quit()
 
