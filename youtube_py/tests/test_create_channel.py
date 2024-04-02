@@ -1,7 +1,7 @@
 import unittest
 import os
-from youtube import create_channel
 from youtube_class import Youtube
+import time
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -24,8 +24,8 @@ class TestCreateChannel(unittest.TestCase):
         youtube = Youtube(email=test_email, password=test_password)
         # Test the create_channel function with valid inputs
         result = youtube.create_channel(
-            channel_name="William Ferns",
-            channel_handle="sjflasj1892",
+            channel_name="Adonis Jamal",
+            channel_handle="jamal283492857",
             channel_description="hello there",
             profile_picture_path=profile_picture_path,
             banner_picture_path=banner_picture_path,
@@ -33,7 +33,9 @@ class TestCreateChannel(unittest.TestCase):
             contact_email_path="contact@williamferns.com",
             links=[{"title": "Link 1", "url": "https://www.link1.com"}, {"title": "Link 2", "url": "https://www.link2.com"}]
         )
+
         if result:
+            print(result)
             # Assert that the channel was created successfully
             self.assertEqual(result["message"], "Channel created successfully")
             self.assertIsNotNone(result["channel_id"])
@@ -41,5 +43,6 @@ class TestCreateChannel(unittest.TestCase):
 
         else:
             raise Exception("Channel creation failed, result is None")
-
+        
+        time.sleep(5)
         youtube.close()

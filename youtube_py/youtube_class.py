@@ -78,6 +78,11 @@ class Youtube:
         )
         self.driver = result['driver']
 
+        print(result)
+
+        return result
+
+
     def create_video(
         self,
         absolute_video_path: str,
@@ -157,6 +162,7 @@ class Youtube:
             schedule,
         )
         self.driver = result['driver'] 
+        return result
 
     def delete_channel(
         self,
@@ -164,6 +170,7 @@ class Youtube:
     ):
         result = youtube.delete_channel(self.driver, email)
         self.driver = result['driver']
+        return result
 
     def close(self):
         if self.driver:

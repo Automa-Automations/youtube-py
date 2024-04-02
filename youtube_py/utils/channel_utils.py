@@ -56,9 +56,11 @@ def sign_into_youtube_channel(
 
             next_button = find_element(driver, By.XPATH, "//button[contains(span/text(), 'Next')]")
             next_button.click()
-
             return driver
     except Exception as e:
         print("Error signing into youtube channel: ", e)
+
         with open("error.txt", "w") as f:
             f.write(str(e))
+
+        return driver

@@ -1,6 +1,7 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import undetected_chromedriver as uc
+import random
 
 # Short function to find element, using webdriver wait
 def find_element(driver, by, value, timeout=10):
@@ -22,3 +23,7 @@ def new_driver():
     driver = uc.Chrome(options=options)
     return driver
 
+
+def gen_random_string(length=8):
+    random_string = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(length))
+    return random_string

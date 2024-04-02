@@ -1,6 +1,6 @@
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from utils import find_element, scroll_to_bottom, sign_into_youtube_channel, set_element_innertext, new_driver
+from utils import find_element, scroll_to_bottom, set_element_innertext, gen_random_string
 import time
 
 def create_channel(
@@ -16,7 +16,11 @@ def create_channel(
 
     try:
         print("1. Creating channel...")
-        driver.get("https://youtube.com")
+        youtube_url = "https://youtube.com"
+        time.sleep(5)
+        if driver.current_url != youtube_url:
+            driver.get("https://youtube.com")
+
         avatar_button = find_element(driver, By.CSS_SELECTOR, "button[id='avatar-btn']")
         avatar_button.click()
 
@@ -57,6 +61,15 @@ def create_channel(
         channel_handle_input.send_keys(Keys.CONTROL + 'a')
         channel_handle_input.send_keys(Keys.CONTROL + Keys.BACKSPACE)
         channel_handle_input.send_keys(channel_handle)
+
+        time.sleep(5)
+        # Check if the text "This handle isn't available" is somewhere visible on the screen
+        if find_element(driver, By.XPATH, '//*[contains(text(), "This handle isn\'t available.")]'):
+            random_channel_handle = gen_random_string(9)
+            channel_handle_input = find_element(driver, By.CSS_SELECTOR, "input[id='handle-input']")
+            channel_handle_input.click()
+            channel_handle_input.clear()
+            channel_handle_input.send_keys(random_channel_handle)
 
         channel_description_input = find_element(driver, By.CSS_SELECTOR, "div[aria-label='Tell viewers about your channel. Your description will appear in the About section of your channel and search results, among other places.']")
         set_element_innertext(driver, channel_description_input, channel_description)
