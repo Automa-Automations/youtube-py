@@ -3,7 +3,7 @@ import youtube
 from dataclasses import dataclass
 
 @dataclass
-class YoutubeClass:
+class Youtube:
     
     def create_channel(
         self, 
@@ -115,7 +115,6 @@ class YoutubeClass:
     def create_community_post(
         self, 
         community_post_title: str,
-        community_post_configuration_object: dict,
         schedule: Optional[dict] = None,
         email: Optional[str] = None,
         password: Optional[str] = None,
@@ -127,56 +126,6 @@ class YoutubeClass:
 
         Parameters:
         - community_post_title (str): title of the community post.
-        - community_post_configuration_object (dict): configuration object of the community post.
-            The communication_post_configuration must follow one of the examples below: 
-            - Example 1: Simple Text Post:
-            {
-                "type": "text",
-            }
-            - Example 2: Image with Text Post:
-            {
-                "type": "image",
-                "images_absolute_path": [
-                    "path/to/image.jpg",
-                    "path/to/image.jpg",
-                    ... # (Up to 5 images max, GIFs are allowd as well)
-                ], # If you only want to upload one image, you can just provide a string instead of a list.
-            }
-            - Example 3: Image Poll Post:
-            {
-                "type": "image_poll",
-                "options": [
-                    {
-                        "text": "Option 1",
-                        "image_absolute_path": "path/to/image1.jpg"
-                    },
-                    ...
-                ]
-            }
-            - Example 4: Text Poll Post:
-            {
-                "type": "text_poll",
-                "options": [
-                    "Option 1", "Option 2", "Option 3", ...
-                ],
-            }
-            - Example 5: Quiz Post:
-            {
-                "type": "quiz",
-                "options": [
-                    {
-                        "text": "Answer 1",
-                        "reason_answer": "Reason for answer 1", # This means that this is the correct answer. There may only be one correct answer
-                    },
-                    {
-                        "text": "Answer 2", # Incorrect answer 
-                    },
-                    {
-                        "text": "Answer 2", # Incorrect answer 
-                    },
-                    ...
-                ],
-            }
         - schedule (Optional[dict]): time to schedule the post.
             The schedule object must follow the example below:
             {
@@ -202,7 +151,6 @@ class YoutubeClass:
         """
         youtube.create_community_post(
             community_post_title,
-            community_post_configuration_object,
             schedule,
             email,
             password,
