@@ -4,27 +4,19 @@ from utils import find_element, scroll_to_bottom, sign_into_youtube_channel, set
 import time
 
 def create_channel(
+    driver,
     channel_name: str,
     channel_handle: str,
     channel_description: str,
-    email: str,
-    password: str,
     profile_picture_path: str,
     banner_picture_path: str, watermark_picture_path: str,
     contact_email_path: str,
     links: list,
 ):
-    print("1. Instantiating driver...")
-    driver = new_driver()
 
     try:
-        print("2. Signing into Google Account...")
-        driver = sign_into_youtube_channel(driver=driver, email=email, password=password)
-
-        if not driver:
-            raise Exception("Could not sign into youtube channel.")
-
-        print("3. Creating channel...")
+        print("1. Creating channel...")
+        driver.get("https://youtube.com")
         avatar_button = find_element(driver, By.CSS_SELECTOR, "button[id='avatar-btn']")
         avatar_button.click()
 
@@ -34,7 +26,7 @@ def create_channel(
         create_channel_button = find_element(driver, By.XPATH, "//button[contains(., 'Create channel')]")
         create_channel_button.click()
 
-        print("4. Getting channel ID...")
+        print("2. Getting channel ID...")
         while True:
             current_url = driver.current_url
             if current_url.find("channel/") != -1:
@@ -43,7 +35,7 @@ def create_channel(
                     channel_id = channel_id.split("?")[0]
                 break
 
-        print("5. Navigating to basic info tab...")
+        print("3. Navigating to basic info tab...")
         driver.get(f"https://studio.youtube.com/channel/{channel_id}/editing/details")
 
         # If Welcome to Youtube Studio popup opens:
@@ -53,7 +45,7 @@ def create_channel(
         except:
             print("No welcome popup found.")
 
-        print("6. Filling in channel details...")
+        print("4. Filling in channel details...")
         channel_name_input = find_element(driver, By.CSS_SELECTOR, "input[id='brand-name-input']")
         channel_name_input.click()
         channel_name_input.send_keys(Keys.CONTROL + 'a')
@@ -69,7 +61,7 @@ def create_channel(
         channel_description_input = find_element(driver, By.CSS_SELECTOR, "div[aria-label='Tell viewers about your channel. Your description will appear in the About section of your channel and search results, among other places.']")
         set_element_innertext(driver, channel_description_input, channel_description)
 
-        print("7. Filling in contact channel links...")
+        print("5. Filling in contact channel links...")
         scroll_to_bottom(driver)
 
         for i, link in enumerate(links):
@@ -100,16 +92,16 @@ def create_channel(
 
         scroll_to_bottom(driver)
     
-        print("8. Filling in contact email...")
+        print("6. Filling in contact email...")
         contact_email_input = find_element(driver, By.CSS_SELECTOR, 'input[placeholder="Email address"]')
         contact_email_input.click()
         contact_email_input.send_keys(contact_email_path)
 
-        print("9. Navigating to branding tab...")
+        print("7. Navigating to branding tab...")
         branding_navigation_button = find_element(driver, By.XPATH, "//ytcp-ve[span[contains(text(), 'Branding')]]")
         branding_navigation_button.click()
         
-        print("10. Uploading profile picture, banner, and watermark...")
+        print("8. Uploading profile picture, banner, and watermark...")
         # Upload profile picture
         thumbnail_upload_file_input = find_element(driver, By.XPATH, "/html/body/ytcp-app/ytcp-entity-page/div/div/main/div/ytcp-animatable[6]/ytcp-channel-editing-section/iron-pages/div[2]/ytcp-channel-editing-images-tab/div/section[1]/ytcp-profile-image-upload/div/div[3]/div[2]/div[2]/input")
         thumbnail_upload_file_input.send_keys(profile_picture_path)
@@ -131,7 +123,7 @@ def create_channel(
         done_button = find_element(driver, By.XPATH, "/html/body/ytcp-video-watermark-image-editor/ytcp-dialog/tp-yt-paper-dialog/div[3]/div/ytcp-button[2]")
         done_button.click()
 
-        print("11. Publishing channel...")
+        print("9. Publishing channel...")
         time.sleep(3)
         publish_button = find_element(driver, By.XPATH, '//ytcp-button[@id="publish-button"]')
         publish_button.click()
@@ -142,23 +134,21 @@ def create_channel(
             "status": "success",
             "channel_id": channel_id, 
             "message": "Channel created successfully", 
-            "cookies": driver.get_cookies()
+            "cookies": driver.get_cookies(),
+            "driver": driver
         }
 
-        print("12. Channel created successfully.")
+        print("10. Channel created successfully.")
         print("Return Data: ", data)
-        driver.quit()
         return data
 
     except Exception as e:
         print("Error: ", e)
         with open("error.txt", "w") as file:
             file.write(str(e))
-
-        if driver:
-            driver.quit()
         return {
             "status": "error",
             "message": "An error occurred while creating channel.",
-            "error": str(e)
+            "error": str(e),
+            "driver": driver,
         }

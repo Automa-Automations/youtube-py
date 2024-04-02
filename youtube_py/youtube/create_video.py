@@ -1,44 +1,28 @@
 from typing import Optional
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from utils import sign_into_youtube_channel, find_element, new_driver
+from utils import find_element
 import time
 
 def create_video(
+    driver,
     absolute_video_path: str,
     video_title: str,
     video_description: str,
     video_thumbnail_absolute_path: Optional[str] = None,
     video_schedule_date: Optional[str] = None,
     video_schedule_time: Optional[str] = None,
-    email: Optional[str] = None,
-    password: Optional[str] = None,
-    cookies: Optional[str] = None,
-    absolute_chromium_profile_path: Optional[str] = None,
 ):
-
-    if not cookies and not email and not password and not absolute_chromium_profile_path:
-        raise ValueError("You need to provide either cookies, chromium profile path, or email and password")
-
-    print("1. Starting the browser...")
-    driver = new_driver()
-
     try: 
-        print("2. Signing into the youtube channel...")
-        driver = sign_into_youtube_channel(driver, cookies=cookies, email=email, password=password, absolute_chromium_profile_path=absolute_chromium_profile_path)
- 
-        if not driver:
-            raise Exception("Could not sign into youtube channel.")
-        
-        print("3. Navigate to the upload page...")
+        print("1. Navigate to the upload page...")
         time.sleep(3)
         driver.get("https://youtube.com/upload")
 
-        print("4. Uploading the video...")
+        print("2. Uploading the video...")
         upload_video_input = find_element(driver, By.CSS_SELECTOR, "input[type='file']")
         upload_video_input.send_keys(absolute_video_path)
         
-        print(f"4.1. Adding video title '{video_title}'...")
+        print(f"3.1. Adding video title '{video_title}'...")
         # Input title and description of video
         title_input = find_element(driver, By.CSS_SELECTOR, "div[aria-label='Add a title that describes your video (type @ to mention a channel)']")
         # set_element_innertext(driver, title_input, video_title)
@@ -47,7 +31,7 @@ def create_video(
         title_input.send_keys(Keys.DELETE)
         title_input.send_keys(video_title)
         
-        print(f"4.2. Adding video description '{video_description}'...")
+        print(f"3.2. Adding video description '{video_description}'...")
         description_input = find_element(driver, By.CSS_SELECTOR, "div[aria-label='Tell viewers about your video (type @ to mention a channel)']")
         description_input.click()
         description_input.send_keys(Keys.CONTROL + "a")
@@ -61,11 +45,11 @@ def create_video(
             thumbnail_input.send_keys(video_thumbnail_absolute_path)
             time.sleep(10)
         
-        print("4.3. Setting video visibility to 'Not Made for Kids'...")
+        print("3.3. Setting video visibility to 'Not Made for Kids'...")
         not_for_kids_radio = find_element(driver, By.CSS_SELECTOR , "tp-yt-paper-radio-button[name='VIDEO_MADE_FOR_KIDS_NOT_MFK']", 100)
         not_for_kids_radio.click()
 
-        print(f"4.4. Setting video visibility to 'Public'...")
+        print(f"3.4. Setting video visibility to 'Public'...")
         visibility_tab = find_element(driver, By.CSS_SELECTOR, "button[id='step-badge-3']")
         visibility_tab.click()
 
@@ -74,7 +58,7 @@ def create_video(
 
         # Schedule video if schedule time is specified
         if video_schedule_date and video_schedule_time:
-            print(f"4.5. Scheduling video for {video_schedule_date} at {video_schedule_time}...")
+            print(f"3.5. Scheduling video for {video_schedule_date} at {video_schedule_time}...")
             schedule_dropdown_button = find_element(driver, By.CSS_SELECTOR, "ytcp-icon-button[id='second-container-expand-button']")
             schedule_dropdown_button.click()
        
@@ -97,7 +81,7 @@ def create_video(
                     child.click()
                     break
 
-        print("5. Checking if the video was uploaded...")
+        print("4. Checking if the video was uploaded...")
         while True:
             time.sleep(1)
             progress_label = find_element(driver, By.CSS_SELECTOR, "span[class='progress-label style-scope ytcp-video-upload-progress']")
@@ -105,7 +89,7 @@ def create_video(
                 break
             print("Still uploading...")
 
-        print("6. Saving the video...")
+        print("5. Saving the video...")
         save_button = find_element(driver, By.CSS_SELECTOR, "ytcp-button[id='done-button']")
         save_button.click()
 
@@ -118,7 +102,7 @@ def create_video(
 
         time.sleep(5)
 
-        print("7. Getting the video and channel id...")
+        print("6. Getting the video and channel id...")
         # Get channel id
         current_url = driver.current_url
         channel_id = current_url.split("channel/")[1].split("/")[0]
@@ -138,15 +122,14 @@ def create_video(
         if video_href:
             video_id = video_href.split("video/")[1].split("/")[0]
 
-        print("8. Video uploaded successfully! Quitting driver")
-        # Quit driver
-        driver.quit()
+        print("7. Video uploaded successfully!")
 
         return_dict = {
             "status": "success",
             "channel_id": channel_id,
             "video_id": video_id,
             "message": "Video uploaded successfully",
+            "driver": driver,
         }
 
         print(return_dict)
@@ -163,4 +146,5 @@ def create_video(
             "status": "error",
             "message": "An error occurred while uploading video.",
             "error": str(e),
+            "driver": driver,
         }

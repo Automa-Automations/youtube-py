@@ -1,10 +1,11 @@
-from tests import TestCreateChannel, TestCreateVideo, TestCreateCommunityPost
+import tests 
 import unittest
 
 tests = {
-    "test_create_channel": TestCreateChannel,
-    "test_create_video": TestCreateVideo,
-    "test_create_community_post": TestCreateCommunityPost,
+    "test_create_channel": tests.TestCreateChannel,
+    "test_create_video": tests.TestCreateVideo,
+    "test_create_community_post": tests.TestCreateCommunityPost,
+    "test_delete_channel": tests.TestDeleteChannel,
 }
 
 def main():

@@ -8,7 +8,7 @@ def sign_into_youtube_channel(
     driver,
     email: Optional[str] = None,
     password: Optional[str] = None, 
-    cookies: Optional[str] = None,
+    cookies: Optional[list] = None,
     absolute_chromium_profile_path: Optional[str] = None
 ):
     if not email and not password and not cookies and not absolute_chromium_profile_path:
