@@ -1,7 +1,6 @@
 from typing import Optional
 import youtube 
 from utils import sign_into_youtube_channel, new_driver
-
 class Youtube:
     def __init__(
         self,
@@ -56,12 +55,14 @@ class Youtube:
             "status": "success",
             "channel_id": channel_id, 
             "message": "Channel created successfully", 
-            "cookies": driver.get_cookies()
+            "cookies": driver.get_cookies(),
+            "driver": driver
         }
         - example error return object: {
             "status": "error",
             "message": "An error occurred while creating channel."
-            "error": error_message
+            "error": error_message,
+            "driver": driver
         }
         """
         result = youtube.create_channel(
@@ -108,11 +109,13 @@ class Youtube:
             "channel_id": channel_id,
             "video_id": video_id,
             "message": "Video uploaded successfully",
+            "driver": driver,
         }
         - example error return object: {
             "status": "error",
             "message": "An error occurred while uploading video.",
-            "error": error_message
+            "error": error_message,
+            "driver": driver,
         }
         """
         result = youtube.create_video(
@@ -149,11 +152,13 @@ class Youtube:
         - example success return object: {
             "status": "success", 
             "message": "Community post created successfully", 
+            "driver": driver,
         }
         - example error return object: {
             "status": "error",
             "message": "An error occurred while creating community post."
-            "error": error_message
+            "error": error_message,
+            "driver": driver
         }
         """
         result = youtube.create_community_post(
@@ -168,12 +173,48 @@ class Youtube:
         self,
         email: str,
     ):
+        """
+        Function to delete youtube channel permanently.
+
+        Parameters:
+        email (str): email of the channel.
+        
+        Returns:
+        - example success return object: {
+            "status": "success",
+            "driver": driver,
+            "message": "Channel deletion successful"
+        }
+        - example error return object: {
+            "status": "error",
+            "message": "An error occurred while deleting channel",
+            "driver": driver,
+            "error": str(e)
+        }
+        """
         result = youtube.delete_channel(self.driver, email)
         self.driver = result['driver']
         return result
 
     def close(self):
+        """
+        Function to close Chromium driver. Call this function when you want the driver to be closed.
+
+        Parameters:
+        None
+
+        Returns (no errors):
+        {
+            "status": "success",
+            "message": "Driver closed successfully"
+        }
+        """
         if self.driver:
             self.driver.quit()
+
+            return {
+                "status": "success",
+                "message": "Driver closed successfully"
+            }
         else:
             raise Exception("Driver not found")
