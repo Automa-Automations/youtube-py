@@ -28,17 +28,45 @@ class Youtube:
     
     def create_channel(
         self, 
+    ):
+        """
+        Function to create a Youtube channel. 
+        Returns:
+        - example success return object: {
+            "status": "success",
+            "channel_id": channel_id, 
+            "message": "Channel created successfully", 
+            "cookies": driver.get_cookies(),
+            "driver": driver
+        }
+        - example error return object: {
+            "status": "error",
+            "message": "An error occurred while creating channel."
+            "error": error_message,
+            "driver": driver
+        }
+        """
+        result = youtube.create_channel(
+            self.driver,
+        )
+        self.driver = result['driver']
+
+        print(result)
+
+        return result
+
+    def edit_channel(
+        self,
         channel_name: str,
         channel_handle: str,
         channel_description: str,
         profile_picture_path: str,
-        banner_picture_path: str,
-        watermark_picture_path: str,
+        banner_picture_path: str, watermark_picture_path: str,
         contact_email_path: str,
         links: list,
     ):
         """
-        Function to create a Youtube channel. 
+        Function to edit channel
 
         Parameters:
         - channel_name (str): name of the channel.
@@ -61,23 +89,21 @@ class Youtube:
                 },
                 ...
             ]
-        
         Returns:
         - example success return object: {
             "status": "success",
-            "channel_id": channel_id, 
-            "message": "Channel created successfully", 
-            "cookies": driver.get_cookies(),
+            "message": "Channel edited successfully",
+            "channel_id": channel_id,
             "driver": driver
         }
         - example error return object: {
             "status": "error",
-            "message": "An error occurred while creating channel."
-            "error": error_message,
-            "driver": driver
+            "message": "An error occurred while editing channel.",
+            "error": str(e),
+            "driver": driver,
         }
         """
-        result = youtube.create_channel(
+        result = youtube.edit_channel(
             self.driver,
             channel_name,
             channel_handle,
@@ -89,9 +115,6 @@ class Youtube:
             links
         )
         self.driver = result['driver']
-
-        print(result)
-
         return result
 
 

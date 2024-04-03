@@ -4,3 +4,4 @@ from youtube.create_community_post import create_community_post
 from youtube.delete_channel import delete_channel
 from youtube.create_sub_channels import create_sub_channels
 from youtube.switch_to_sub_channel import switch_to_sub_channel 
+from youtube.edit_channel import edit_channel 

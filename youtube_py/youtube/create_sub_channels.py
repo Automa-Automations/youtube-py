@@ -43,4 +43,7 @@ def create_sub_channels(
         time.sleep(10)
         
         print("6. Switching to newly created sub channel...")
-        driver = switch_to_sub_channel(driver, sub_channel['channel_name'])
+        result = switch_to_sub_channel(driver, sub_channel['channel_name'])
+        driver = result['driver']
+
+        print("7. Editing channel...")
