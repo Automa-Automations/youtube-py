@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 import youtube 
 from utils import sign_into_youtube_channel, new_driver
 class Youtube:
@@ -41,14 +41,26 @@ class Youtube:
         Function to create a Youtube channel. 
 
         Parameters:
-        channel_name (str): name of the channel.
-        channel_handle (str): channel handle/username.
-        channel_description (str): description of the channel.
-        profile_picture_path (str): path of the profile picture of the channel.
-        banner_picture_path (str): path of the banner picture of the channel.
-        watermark_picture_path (str): path of the watermark picture of the channel.
-        contact_email_path (str): path of the contact email of the channel.
-        links (list): list of links to be added to the channel.
+        - channel_name (str): name of the channel.
+        - channel_handle (str): channel handle/username.
+        - channel_description (str): description of the channel.
+        - profile_picture_path (str): path of the profile picture of the channel.
+        - banner_picture_path (str): path of the banner picture of the channel.
+        - watermark_picture_path (str): path of the watermark picture of the channel.
+        - contact_email_path (str): path of the contact email of the channel.
+        - links (list[dict]): list of links to be added to the channel.
+            - Format of links:
+            [
+                {
+                    "title": str,
+                    "url": str,
+                },
+                {
+                    "title": str,
+                    "url": str,
+                },
+                ...
+            ]
         
         Returns:
         - example success return object: {
@@ -201,7 +213,7 @@ class Youtube:
         Function to close Chromium driver. Call this function when you want the driver to be closed.
 
         Parameters:
-        None
+        - None
 
         Returns (no errors):
         {
@@ -218,3 +230,65 @@ class Youtube:
             }
         else:
             raise Exception("Driver not found")
+
+    def create_sub_channels(
+        self,
+        sub_channels_list: List[dict],
+        ):
+        """
+        Function to create sub channels. This function will only work if the channel is already verified.
+
+        Parameters:
+        - sub_channels_list (List[dict]): list of sub channels to be created.
+            - Format of each list dictionary:
+            {
+                channel_name: str,
+                channel_handle: str,
+                channel_description: str,
+                profile_picture_path: str,
+                banner_picture_path: str,
+                watermark_picture_path: str,
+                contact_email_path: str,
+                links: list,
+            }
+                - Format of links:
+                    [
+                        {
+                            "title": str,
+                            "url": str,
+                        },
+                        {
+                            "title": str,
+                            "url": str,
+                        },
+                        ...
+                    ]
+        """
+        result = youtube.create_sub_channels(self.driver, sub_channels_list)
+        self.driver = result['driver']
+        return result
+
+    def switch_to_sub_channel(
+        self,
+        channel_name: str, # You can also put the channel handle as the value for channel_name, will still work. That way, it will be more accurate if there is multiple channels with the same name.
+    ):
+        """
+        Function to switch to a sub channel.
+        Parameters:
+        - channel_name (str): channel name or handle of the sub channel to switch to.
+        Returns:
+        - example success return object: {
+            "status": "success",
+            "message": "Switched to sub channel successfully.",
+            "driver": driver
+        }
+        - example error return object: {
+            "status": "error",
+            "message": "An error occurred while switching to sub channel.",
+            "error": str(e),
+            "driver": driver
+        }
+        """
+        result = youtube.switch_to_sub_channel(self.driver, channel_name)
+        self.driver = result['driver']
+        return result

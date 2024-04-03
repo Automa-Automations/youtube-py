@@ -1,5 +1,5 @@
 import unittest
-from youtube_class import Youtube
+from classes import Youtube
 import os
 from dotenv import load_dotenv
 

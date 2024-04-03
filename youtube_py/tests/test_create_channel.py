@@ -1,6 +1,6 @@
 import unittest
 import os
-from youtube_class import Youtube
+from classes import Youtube
 import time
 from dotenv import load_dotenv
 
