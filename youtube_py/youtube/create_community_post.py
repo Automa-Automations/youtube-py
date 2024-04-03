@@ -9,7 +9,7 @@ def create_community_post(
     community_post_title: str,
     schedule: Optional[dict] = None,
 ):
-
+    time.sleep(5)
     driver.get("https://youtube.com")
     try:
         print("1. Going to community page...")

@@ -26,7 +26,6 @@ class Youtube:
         driver = sign_into_youtube_channel(self.driver, self.email, self.password, self.cookies, self.absolute_chromium_profile_path)
         # Set class driver to driver
         self.driver = driver
-
     
     def create_channel(
         self, 
@@ -126,6 +125,7 @@ class Youtube:
             video_schedule_time,
         )
         self.driver = result['driver']
+        return result
 
     def create_community_post(
         self, 

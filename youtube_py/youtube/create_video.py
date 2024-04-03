@@ -132,10 +132,7 @@ def create_video(
             "driver": driver,
         }
 
-        print(return_dict)
-
         return return_dict
-        
 
     except Exception as e:
         print('Error:', e)
