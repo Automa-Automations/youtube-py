@@ -3,3 +3,4 @@ from tests.test_create_video import TestCreateVideo
 from tests.test_create_community_post import TestCreateCommunityPost
 from tests.test_delete_channel import TestDeleteChannel
 from tests.test_edit_channel import TestEditChannel
+from tests.test_create_sub_channels import TestCreateSubChannels

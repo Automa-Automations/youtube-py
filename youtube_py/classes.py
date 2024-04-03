@@ -260,40 +260,21 @@ class Youtube:
 
     def create_sub_channels(
         self,
-        sub_channels_list: List[dict],
+        sub_channels_names: List[str],
         ):
         """
         Function to create sub channels. This function will only work if the channel is already verified.
 
         Parameters:
-        - sub_channels_list (List[dict]): list of sub channels to be created.
-            - Format of each list dictionary:
-            {
-                channel_name: str,
-                channel_handle: str,
-                channel_description: str,
-                profile_picture_path: str,
-                banner_picture_path: str,
-                watermark_picture_path: str,
-                contact_email_path: str,
-                links: list,
-            }
-                - Format of links:
-                    [
-                        {
-                            "title": str,
-                            "url": str,
-                        },
-                        {
-                            "title": str,
-                            "url": str,
-                        },
-                        ...
-                    ]
+        - sub_channels_names (List[str]): list of sub channels names to be created.
         """
-        result = youtube.create_sub_channels(self.driver, sub_channels_list)
-        self.driver = result['driver']
-        return result
+        result = youtube.create_sub_channels(self.driver, sub_channels_names)
+
+        if result:
+            self.driver= result['driver']
+            return result
+        else:
+            raise Exception("An error occurred while creating sub channels. Result is None.")
 
     def switch_to_sub_channel(
         self,
