@@ -38,6 +38,8 @@ class TestEditChannel(unittest.TestCase):
             # Assert that the channel was created successfully
             self.assertEqual(result["message"], "Channel edited successfully")
             self.assertIsNotNone(result["channel_id"])
+            self.assertIsNotNone(result["channel_name"])
+            self.assertIsNotNone(result["channel_handle"])
         else:
             raise Exception("Channel edit failed, result is None")
         

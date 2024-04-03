@@ -96,6 +96,8 @@ class Youtube:
             "status": "success",
             "message": "Channel edited successfully",
             "channel_id": channel_id,
+            "channel_name": channel_name,
+            "channel_handle": channel_handle, # if channel_handle is unavailable, it will use a random string as the new channel handle.
             "driver": driver
         }
         - example error return object: {

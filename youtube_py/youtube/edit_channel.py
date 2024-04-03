@@ -55,13 +55,20 @@ def edit_channel(
         channel_handle_input.send_keys(channel_handle)
 
         time.sleep(5)
-        # Check if the text "This handle isn't available" is somewhere visible on the screen
-        if find_element(driver, By.XPATH, '//*[contains(text(), "This handle isn\'t available.")]'):
-            random_channel_handle = gen_random_string(9)
-            channel_handle_input = find_element(driver, By.CSS_SELECTOR, "input[id='handle-input']")
-            channel_handle_input.click()
-            channel_handle_input.clear()
-            channel_handle_input.send_keys(random_channel_handle)
+        while True:
+            try:
+                # Check if the text "This handle isn't available" is somewhere visible on the screen
+                if find_element(driver, By.XPATH, '//*[contains(text(), "This handle isn\'t available.")]'):
+                    channel_handle  = gen_random_string(9)
+                    channel_handle_input = find_element(driver, By.CSS_SELECTOR, "input[id='handle-input']")
+                    channel_handle_input.click()
+                    channel_handle_input.clear()
+                    channel_handle_input.send_keys(channel_handle)
+                    time.sleep(3)
+                else:
+                    break
+            except:
+                break
 
         channel_description_input = find_element(driver, By.CSS_SELECTOR, "div[aria-label='Tell viewers about your channel. Your description will appear in the About section of your channel and search results, among other places.']")
         set_element_innertext(driver, channel_description_input, channel_description)
@@ -139,7 +146,9 @@ def edit_channel(
             "status": "success",
             "message": "Channel edited successfully",
             "channel_id": channel_id,
-            "driver": driver
+            "channel_name": channel_name,
+            "channel_handle": channel_handle,
+            "driver": driver,
         }
 
     except Exception as e:
