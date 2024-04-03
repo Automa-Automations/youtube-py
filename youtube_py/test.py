@@ -8,6 +8,7 @@ tests = {
     "test_create_community_post": tests.TestCreateCommunityPost,
     "test_delete_channel": tests.TestDeleteChannel,
     "test_create_sub_channels": tests.TestCreateSubChannels,
+    "test_switch_to_sub_channels": tests.TestSwitchToSubChannel,
 }
 
 def main():
