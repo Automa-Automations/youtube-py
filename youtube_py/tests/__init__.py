@@ -14,3 +14,4 @@ from tests.test_edit_channel import TestEditChannel
 from tests.test_edit_sub_channel import TestEditSubChannel
 
 from tests.test_switch_to_sub_channel import TestSwitchToSubChannel
+from tests.test_list_all_channels import TestListAllChannels 

@@ -327,3 +327,29 @@ class Youtube:
         result = youtube.switch_to_sub_channel(self.driver, channel_name)
         self.driver = result['driver']
         return result
+    
+    def list_all_channels(
+        self
+    ):
+        """
+        Function to list all channels for account.
+
+        Parameters:
+        - None
+
+        Returns:
+        - example success return object: {
+            "channels_list": channels_list,
+            "status": "success",
+            "message": "Channels listed successfully",
+        }
+        - example error return object: {
+            "status": "error",
+            "message": str(e),
+            "driver": driver
+        }
+        """
+        result = youtube.list_all_channels(self.driver)
+        self.driver = result['driver']
+        return result
+

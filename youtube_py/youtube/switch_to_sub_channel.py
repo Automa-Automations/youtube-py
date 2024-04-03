@@ -1,6 +1,6 @@
 import time
 from selenium.webdriver.common.by import By
-from utils import find_element
+from utils import find_element, find_elements
 
 def switch_to_sub_channel(
     driver,
@@ -18,9 +18,9 @@ def switch_to_sub_channel(
         switch_account_button = find_element(driver, By.XPATH, "/html/body/ytd-app/ytd-popup-container/tp-yt-iron-dropdown/div/ytd-multi-page-menu-renderer/div[3]/div[1]/yt-multi-page-menu-section-renderer[1]/div[2]/ytd-compact-link-renderer[2]")
         switch_account_button.click()
         
-        time.sleep(5)
+        time.sleep(3)
 
-        channels_items = driver.find_elements(By.CSS_SELECTOR, "ytd-account-item-renderer[thumbnail-size='48']")
+        channels_items = find_elements(driver, By.CSS_SELECTOR, "ytd-account-item-renderer[thumbnail-size='48']")
         does_sub_channel_exist = False
         for channel_item in channels_items:
             if channel_name in channel_item.text:

@@ -13,6 +13,7 @@ tests = {
     "test_delete_channel": tests.TestDeleteChannel,
     "test_delete_sub_channel": tests.TestDeleteSubChannel,
     "test_switch_to_sub_channel": tests.TestSwitchToSubChannel,
+    "test_list_all_channels": tests.TestListAllChannels,
 }
 
 def main():

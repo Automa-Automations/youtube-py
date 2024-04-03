@@ -22,6 +22,6 @@ class TestSwitchToSubChannel(unittest.TestCase):
             # Asserting that the result is a success
             self.assertEqual(result["status"], "success")
         else:
-            raise Exception("Channel deletion failed, result is None")
+            raise Exception("Channel switching failed, result is None")
 
         youtube.close()
