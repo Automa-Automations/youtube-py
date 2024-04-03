@@ -9,9 +9,10 @@ tests = {
     "test_create_video": tests.TestCreateVideo,
     "test_create_video_sub_channel": tests.TestCreateVideoSubChannel,
     "test_create_community_post": tests.TestCreateCommunityPost,
+    "test_create_community_post_sub_channel": tests.TestCreateCommunityPostSubChannel,
     "test_delete_channel": tests.TestDeleteChannel,
     "test_delete_sub_channel": tests.TestDeleteSubChannel,
-    "test_switch_to_sub_channels": tests.TestSwitchToSubChannel,
+    "test_switch_to_sub_channel": tests.TestSwitchToSubChannel,
 }
 
 def main():

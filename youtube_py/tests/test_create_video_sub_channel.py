@@ -16,7 +16,7 @@ class TestCreateVideoSubChannel(unittest.TestCase):
         # Calling the create_video function with valid parameters
         youtube = Youtube(email=test_email, password=test_password)
         youtube.switch_to_sub_channel(
-            "Adonis Here"
+            "Adonis Jamal"
         )
         result = youtube.create_video(
             absolute_video_path=test_video_path,
