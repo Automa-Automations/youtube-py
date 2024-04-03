@@ -15,7 +15,7 @@ class TestSwitchToSubChannel(unittest.TestCase):
 
         youtube = Youtube(email=test_email, password=test_password)
         result = youtube.switch_to_sub_channel(
-            "John C"
+            "Adonis Here"
         )
 
         if result:

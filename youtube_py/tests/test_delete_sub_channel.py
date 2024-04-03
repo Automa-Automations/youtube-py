@@ -17,7 +17,7 @@ class TestDeleteSubChannel(unittest.TestCase):
         youtube.switch_to_sub_channel("Jack S")
 
         result = youtube.delete_channel(
-            "Jack S"
+            "Adonis Here"
         )
 
         if result:

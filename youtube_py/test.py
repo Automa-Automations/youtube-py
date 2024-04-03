@@ -3,13 +3,15 @@ import unittest
 
 tests = {
     "test_create_channel": tests.TestCreateChannel,
+    "test_create_sub_channels": tests.TestCreateSubChannels,
     "test_edit_channel": tests.TestEditChannel,
+    "test_edit_sub_channel": tests.TestEditSubChannel,
     "test_create_video": tests.TestCreateVideo,
+    "test_create_video_sub_channel": tests.TestCreateVideoSubChannel,
     "test_create_community_post": tests.TestCreateCommunityPost,
     "test_delete_channel": tests.TestDeleteChannel,
-    "test_create_sub_channels": tests.TestCreateSubChannels,
-    "test_switch_to_sub_channels": tests.TestSwitchToSubChannel,
     "test_delete_sub_channel": tests.TestDeleteSubChannel,
+    "test_switch_to_sub_channels": tests.TestSwitchToSubChannel,
 }
 
 def main():
