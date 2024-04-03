@@ -235,6 +235,33 @@ class Youtube:
         self.driver = result['driver']
         return result
 
+    def delete_sub_channel(
+        self,
+        channel_name: str,
+    ):
+        """
+        Function to delete sub youtube channel permanently.
+
+        Parameters:
+        channel_name (str): channel name of the channel.
+        
+        Returns:
+        - example success return object: {
+            "status": "success",
+            "driver": driver,
+            "message": "Channel deletion successful"
+        }
+        - example error return object: {
+            "status": "error",
+            "message": "An error occurred while deleting channel",
+            "driver": driver,
+            "error": str(e)
+        }
+        """
+        result = youtube.delete_channel(self.driver, channel_name)
+        self.driver = result['driver']
+        return result
+
     def close(self):
         """
         Function to close Chromium driver. Call this function when you want the driver to be closed.

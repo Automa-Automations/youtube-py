@@ -9,6 +9,7 @@ tests = {
     "test_delete_channel": tests.TestDeleteChannel,
     "test_create_sub_channels": tests.TestCreateSubChannels,
     "test_switch_to_sub_channels": tests.TestSwitchToSubChannel,
+    "test_delete_sub_channel": tests.TestDeleteSubChannel,
 }
 
 def main():
