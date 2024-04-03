@@ -25,7 +25,9 @@ class TestCreateChannel(unittest.TestCase):
             self.assertEqual(result["message"], "Channel created successfully")
             self.assertIsNotNone(result["channel_id"])
             self.assertIsNotNone(result["cookies"])
-
+            self.assertIsNotNone(result["cookies"])
+            self.assertIsNotNone(result["channel_name"])
+            self.assertIsNotNone(result["channel_handle"])
         else:
             raise Exception("Channel creation failed, result is None")
         

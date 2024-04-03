@@ -35,6 +35,8 @@ class Youtube:
         - example success return object: {
             "status": "success",
             "channel_id": channel_id, 
+            "channel_name": default_channel_name,
+            "channel_handle": default_channel_handle,
             "message": "Channel created successfully", 
             "cookies": driver.get_cookies(),
             "driver": driver

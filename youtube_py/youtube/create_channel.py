@@ -16,8 +16,12 @@ def create_channel(
         avatar_button = find_element(driver, By.CSS_SELECTOR, "button[id='avatar-btn']")
         avatar_button.click()
 
-        create_channel_link= find_element(driver, By.XPATH, "//a[contains(text(), 'Create a channel')]")
+        create_channel_link = find_element(driver, By.XPATH, "//a[contains(text(), 'Create a channel')]")
         create_channel_link.click()
+        time.sleep(5)
+        all_inputs = driver.find_elements(By.CSS_SELECTOR, "input[class='style-scope tp-yt-paper-input']")
+        default_channel_name = all_inputs[0].get_attribute("value")
+        default_channel_handle = all_inputs[1].get_attribute("value")
 
         create_channel_button = find_element(driver, By.XPATH, "//button[contains(., 'Create channel')]")
         create_channel_button.click()
@@ -35,6 +39,8 @@ def create_channel(
         data = {
             "status": "success",
             "channel_id": channel_id, 
+            "channel_name": default_channel_name,
+            "channel_handle": default_channel_handle,
             "message": "Channel created successfully", 
             "cookies": driver.get_cookies(),
             "driver": driver
