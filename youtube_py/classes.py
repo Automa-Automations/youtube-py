@@ -557,3 +557,27 @@ class YoutubeData:
         """
         result = youtube.get_all_video_stats_from_channel(channel_handle)
         return result
+
+    def get_channel_id(
+        self,
+        channel_handle: str,
+    ):
+        """
+        Function to get channel ID of the channel.
+
+        Parameters:
+        - channel_handle (str): channel handle of the channel to get channel ID from.
+
+        Returns:
+        - example success return object: {
+            "status": "success",
+            "channel_id": channel_id,
+        }
+        - example error return object: {
+            "status": "error",
+            "message": "An error occurred while converting handle to channel id.",
+            "error": str(e),
+        }
+        """
+        result = youtube.get_channel_id(channel_handle)
+        return result

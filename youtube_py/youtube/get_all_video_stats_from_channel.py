@@ -1,6 +1,7 @@
 import requests
 import math
 import threading
+from youtube.get_channel_id import get_channel_id
 
 def all_videos_from_channel(channel_id):
 
@@ -80,12 +81,11 @@ def get_all_video_stats(all_videos):
     return all_videos_data 
 
 def get_all_video_stats_from_channel(channel_handle: str):
-
-    print(f"Converting handle '{channel_handle}' to channel id...")
-    channel_handle = channel_handle.replace("@", "")
-    request_url = f"https://yt.lemnoslife.com/channels?handle=@{channel_handle}"
-    response = requests.get(request_url)
-    channel_id = response.json()['items'][0]['id']
+    result = get_channel_id(channel_handle)
+    if result['status'] == "success":
+        channel_id = result['channel_id']
+    else: 
+        raise Exception(result['message'])
 
     try:
         all_videos = all_videos_from_channel(channel_id)
