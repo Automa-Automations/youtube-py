@@ -348,6 +348,96 @@ class Youtube:
         self.driver = result['driver']
         return result
 
+    def get_my_videos_stats(self):
+        """
+        Function to get all video stats of the channel.
+        Parameters:
+        - None
+        Returns:
+        - example success return object: {
+            "all_video_stats": all_videos_with_stats,
+            "status": "success",
+            "message": "All video stats fetched successfully."
+        }
+        # Format of all_video_stats:
+        [
+            {
+                "kind": "youtube#video",
+                "etag": "eAGZdVWxoBjCKRPIjFKF64WuM7Q",
+                "id": "0P1FGtdg8o8",
+                "snippet": {
+                    "publishedAt": "2024-04-03T17:00:02Z",
+                    "channelId": "UCWsslCoN3b_wBaFVWK_ye_A",
+                    "title": "What happened in Vegas",
+                    "description": "Email list: https://hamza-ahmed.co.uk/UnfilteredWisdom\nThe only product I sell: https://www.skool.com/adonis\nInstagram: https://www.instagram.com/cultleaderhamza\nTwitter: https://twitter.com/HamzaAdonis",
+                    "thumbnails": {
+                        "default": {
+                            "url": "https://i.ytimg.com/vi/0P1FGtdg8o8/default.jpg",
+                            "width": 120,
+                            "height": 90
+                        },
+                        "medium": {
+                            "url": "https://i.ytimg.com/vi/0P1FGtdg8o8/mqdefault.jpg",
+                            "width": 320,
+                            "height": 180
+                        },
+                        "high": {
+                            "url": "https://i.ytimg.com/vi/0P1FGtdg8o8/hqdefault.jpg",
+                            "width": 480,
+                            "height": 360
+                        },
+                        "standard": {
+                            "url": "https://i.ytimg.com/vi/0P1FGtdg8o8/sddefault.jpg",
+                            "width": 640,
+                            "height": 480
+                        },
+                        "maxres": {
+                            "url": "https://i.ytimg.com/vi/0P1FGtdg8o8/maxresdefault.jpg",
+                            "width": 1280,
+                            "height": 720
+                        }
+                    },
+                    "channelTitle": "Hamza Ahmed",
+                    "tags": [
+                        "hamza ahmed",
+                        "hamza",
+                        "hamza97",
+                        "self improvement",
+                        "entrepreneur",
+                        "entrepreneurship",
+                        "beginners business",
+                        "business",
+                        "youtube subscribers",
+                        "masculinity"
+                    ],
+                    "categoryId": "27",
+                    "liveBroadcastContent": "none",
+                    "defaultLanguage": "en-US",
+                    "localized": {
+                        "title": "What happened in Vegas",
+                        "description": "Email list: https://hamza-ahmed.co.uk/UnfilteredWisdom\nThe only product I sell: https://www.skool.com/adonis\nInstagram: https://www.instagram.com/cultleaderhamza\nTwitter: https://twitter.com/HamzaAdonis"
+                    },
+                    "defaultAudioLanguage": "en-US"
+                },
+                "statistics": {
+                    "viewCount": "31662",
+                    "likeCount": "2255",
+                    "favoriteCount": "0",
+                    "commentCount": "582"
+                }
+            },
+            ...
+        ]
+        - example error return object: {
+            "status": "error",
+            "message": "An error occurred. Please check errorr.txt for more details.",
+            "error": str(e),
+        }
+        """
+        result = youtube.get_my_videos_stats(self.driver)
+        return result
+
+
 @dataclass
 class YoutubeData:
     def get_all_video_stats_from_channel(
