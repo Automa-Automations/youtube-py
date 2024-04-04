@@ -22,6 +22,8 @@ from tests.test_get_my_videos_stats import TestGetMyVideosStats
 from tests.test_get_my_channel_handle import TestGetMyChannelHandle
 from tests.test_get_my_channel_id import TestGetMyChannelID
 
+from tests.test_get_my_channel_stats import TestGetMyChannelStats
+
 # YoutubeData Class
 from tests.test_get_all_video_stats_from_channel import TestGetAllVideoStatsFromChannel
 from tests.test_get_channel_id import TestGetChannelID 

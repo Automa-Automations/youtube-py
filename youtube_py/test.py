@@ -14,12 +14,13 @@ tests = {
     "test_delete_sub_channel": tests.TestDeleteSubChannel,
     "test_switch_to_sub_channel": tests.TestSwitchToSubChannel,
     "test_list_all_channels": tests.TestListAllChannels,
-    "test_get_all_video_stats_from_channel": tests.TestGetAllVideoStatsFromChannel,
     "test_get_my_videos_stats": tests.TestGetMyVideosStats,
+    "test_get_all_video_stats_from_channel": tests.TestGetAllVideoStatsFromChannel,
+    "test_get_video_stats": tests.TestGetVideoStats,
     "test_get_my_channel_handle": tests.TestGetMyChannelHandle,
     "test_get_my_channel_id": tests.TestGetMyChannelID,
     "test_get_channel_id": tests.TestGetChannelID,
-    "test_get_video_stats": tests.TestGetVideoStats,
+    "test_get_my_channel_stats": tests.TestGetMyChannelStats,
     "test_get_channel_stats": tests.TestGetChannelStats,
 }
 

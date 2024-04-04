@@ -510,6 +510,11 @@ class Youtube:
             "driver": driver
         }
         """
+        channel_id_result = self.get_my_channel_id()
+        if channel_id_result['status'] == 'success':
+            result = youtube.get_channel_stats(channel_id_result['channel_id'])
+            print(f"Channel stats: {result}")
+            return result
 
 @dataclass
 class YoutubeData:
