@@ -13,3 +13,4 @@ from youtube.get_my_channel_handle import get_my_channel_handle
 # All methods for YoutubeData class:
 from youtube.get_all_video_stats_from_channel import get_all_video_stats_from_channel
 from youtube.get_channel_id import get_channel_id
+from youtube.get_video_stats import get_video_stats

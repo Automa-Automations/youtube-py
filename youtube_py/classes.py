@@ -581,3 +581,27 @@ class YoutubeData:
         """
         result = youtube.get_channel_id(channel_handle)
         return result
+
+    def get_video_stats(
+        self,
+        video_id: str,
+    ):
+        """
+        Function to get individual video stats
+
+        Parameters:
+        - video_id (str): video id for the video you want to get stats for.
+
+        Returns:
+        - example success return object: {
+            "video_stats": video_stats,
+            "status": "success"
+        }
+        - example error return object: {
+            "status": "error",
+            "message": "Error getting video stats.",
+            "error": str(e),
+        }
+        """
+        result = youtube.get_video_stats(video_id)
+        return result
