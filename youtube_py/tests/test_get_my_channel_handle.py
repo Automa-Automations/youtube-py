@@ -8,17 +8,16 @@ load_dotenv()
 test_email = os.getenv("TEST_EMAIL")
 test_password = os.getenv("TEST_PASSWORD")
 
-class TestGetMyVideosStats(unittest.TestCase):
+class TestGetMyChannelHandle(unittest.TestCase):
 
     def test_edit_channel_success(self):
 
         youtube = Youtube(email=test_email, password=test_password)
-        result = youtube.get_my_videos_stats()
+        result = youtube.get_my_channel_handle()
         if result:
             # Assert that the channel was created successfully
             self.assertEqual(result["status"], "success")
-            self.assertIsNotNone(result["video_stats"])
         else:
-            raise Exception("Channel edit failed, result is None")
+            raise Exception("Getting channel handle, result is None")
 
         youtube.close()

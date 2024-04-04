@@ -15,7 +15,8 @@ tests = {
     "test_switch_to_sub_channel": tests.TestSwitchToSubChannel,
     "test_list_all_channels": tests.TestListAllChannels,
     "test_get_all_video_stats_from_channel": tests.TestGetAllVideoStatsFromChannel,
-    "test_get_my_videos_stats": tests.TestGetMyVideosStats
+    "test_get_my_videos_stats": tests.TestGetMyVideosStats,
+    "test_get_my_channel_handle": tests.TestGetMyChannelHandle,
 }
 
 def main():

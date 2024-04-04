@@ -355,9 +355,10 @@ class Youtube:
         - None
         Returns:
         - example success return object: {
-            "all_video_stats": all_videos_with_stats,
             "status": "success",
-            "message": "All video stats fetched successfully."
+            "message": "Video stats found.",
+            "video_stats": video_stats,
+            "driver": driver,
         }
         # Format of all_video_stats:
         [
@@ -430,13 +431,36 @@ class Youtube:
         ]
         - example error return object: {
             "status": "error",
-            "message": "An error occurred. Please check errorr.txt for more details.",
+            "message": "Video stats not found.",
+            "driver": driver,
             "error": str(e),
         }
         """
         result = youtube.get_my_videos_stats(self.driver)
+        self.driver = result['driver']
         return result
-
+    
+    def get_my_channel_handle(self):
+        """
+        Function to get channel handle of the channel.
+        Parameters:
+        - None
+        Returns:
+        - example success return object: {
+            "status": "success",
+            "message": "Channel ID found.",
+            "channel_handle": channel_handle,
+            "driver": driver
+        }
+        - example error return object: {
+            "status": "error",
+            "message": "Channel ID not found.",
+            "driver": driver
+        }
+        """
+        result = youtube.get_my_channel_handle(self.driver)
+        self.driver = result['driver']
+        return result
 
 @dataclass
 class YoutubeData:
