@@ -1,15 +1,14 @@
 import unittest
-from classes import Youtube
+from classes import YoutubeData
 
-class TestGetMyChannelHandle(unittest.TestCase):
-
-    def get_my_channel_handle_success(self):
-
-        youtube = Youtube(email=test_email, password=test_password)
-        result = youtube.get_my_channel_handle()
-        if result:
+class TestGetChannelStats(unittest.TestCase):
+    def test_get_channel_stats_success(self):
+        youtube_data = YoutubeData()
+        print("in get_channel_stats_success")
+        channel_id_result = youtube_data.get_channel_id("@Hamza97")
+        if channel_id_result['status'] == 'success':
+            result = youtube_data.get_channel_stats(channel_id_result['channel_id'])
+            print(result)
             self.assertEqual(result["status"], "success")
         else:
-            raise Exception("Getting channel handle, result is None")
-
-        youtube.close()
+            raise Exception("Getting channel id, result is None")
