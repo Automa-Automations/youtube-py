@@ -22,6 +22,7 @@ tests = {
     "test_get_channel_id": tests.TestGetChannelID,
     "test_get_my_channel_stats": tests.TestGetMyChannelStats,
     "test_get_channel_stats": tests.TestGetChannelStats,
+    "test_download_video": tests.TestDownloadVideo,
 }
 
 def main():

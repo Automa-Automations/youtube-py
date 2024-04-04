@@ -29,4 +29,5 @@ from tests.test_get_all_video_stats_from_channel import TestGetAllVideoStatsFrom
 from tests.test_get_channel_id import TestGetChannelID 
 from tests.test_get_video_stats import TestGetVideoStats
 from tests.test_get_channel_stats import TestGetChannelStats
+from tests.test_download_video import TestDownloadVideo
 

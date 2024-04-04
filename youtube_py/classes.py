@@ -684,3 +684,29 @@ class YoutubeData:
 
         result = youtube.get_channel_stats(channel_id)
         return result
+
+    def download_video(
+        self,
+        video_id: str,
+        absolute_path: str,
+        filename: str
+    ):
+        """
+        Function to download video from youtube.
+        Parameters:
+        - video_id (str): video id of the video to download.
+        - absolute_path(str): absolute path to where you want to save the downloaded video.
+        - filename(str): filename of the downloaded video.
+        Returns:
+        - example success return object: {
+            "status": "success",
+            "message": "Video downloaded successfully.",
+        }
+        - example error return object: {
+            "status": "error",
+            "message": "Error downloading video.",
+            "error": str(e),
+        }
+        """
+        result = youtube.download_video(video_id, absolute_path, filename)
+        return result
