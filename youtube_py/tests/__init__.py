@@ -18,7 +18,9 @@ from tests.test_switch_to_sub_channel import TestSwitchToSubChannel
 from tests.test_list_all_channels import TestListAllChannels 
 
 from tests.test_get_my_videos_stats import TestGetMyVideosStats
+
 from tests.test_get_my_channel_handle import TestGetMyChannelHandle
+from tests.test_get_my_channel_id import TestGetMyChannelID
 
 # YoutubeData Class
 from tests.test_get_all_video_stats_from_channel import TestGetAllVideoStatsFromChannel

@@ -461,6 +461,56 @@ class Youtube:
         result = youtube.get_my_channel_handle(self.driver)
         self.driver = result['driver']
         return result
+
+    def get_my_channel_id(self):
+        """
+        Function to get your channel id
+
+        Parameters:
+        - None
+
+        Returns:
+        - example success return object: {
+            "status": "success",
+            "channel_id": channel_id,
+        }
+        - example error return object: {
+            "status": "error",
+            "message": "An error occurred while converting handle to channel id.",
+            "error": str(e),
+        }
+        """
+        result = self.get_my_channel_handle()
+        if result['status'] == 'success':
+            channel_id_result = youtube.get_channel_id(result['channel_handle'])
+            if channel_id_result['status'] == 'success':
+                return channel_id_result
+            else:
+                return channel_id_result
+        else:
+            return result
+
+    def get_my_channel_stats(self):
+        """
+        Function toe get your channel stats.
+
+        Parameters:
+        - None
+
+        Returns:
+        - example success return object: {
+            "status": "success",
+            "message": "Channel stats found.",
+            "channel_stats": channel_stats,
+            "driver": driver
+        }
+        - example error return object: {
+            "status": "error",
+            "message": "Channel stats not found.",
+            "driver": driver
+        }
+        """
+
 @dataclass
 class YoutubeData:
     def get_all_video_stats_from_channel(
