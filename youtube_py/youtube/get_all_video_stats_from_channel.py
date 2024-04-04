@@ -2,7 +2,13 @@ import requests
 import math
 import threading
 
-def all_videos_from_channel(channel_id):
+def all_videos_from_channel(channel_handle):
+    print("Converting handle to channel id...")
+    channel_handle = channel_handle.replace("@", "")
+    request_url = f"https://yt.lemnoslife.com/channels?handle=@{channel_handle}"
+    response = requests.get(request_url)
+    channel_id = response.json()['items'][0]['id']
+
     print("Fetching all videos from channel...")
     get_channel_info = f"https://yt.lemnoslife.com/noKey/channels?id={channel_id}&part=contentDetails" 
     response = requests.get(get_channel_info)
@@ -77,7 +83,7 @@ def get_all_video_stats_from_channel(channel_id: str):
         }
     except Exception as e:
         print("An error occurred.")
-        with open("erorr.txt", "w") as f:
+        with open("error.txt", "w") as f:
             f.write(str(e))
 
         return {

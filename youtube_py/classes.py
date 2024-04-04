@@ -1,22 +1,19 @@
 from typing import Optional, List
 import youtube 
 from utils import sign_into_youtube_channel, new_driver
+from dataclasses import dataclass
+
+@dataclass
 class Youtube:
-    def __init__(
-        self,
-        email: Optional[str] = None,
-        password: Optional[str] = None,
-        absolute_chromium_profile_path: Optional[str] = None,
-        cookies: Optional[list] = None,
-    ):
-        # if none is specified, throw error 
-        if email is None and password is None and absolute_chromium_profile_path is None and cookies is None:
-            raise Exception("Please provide either email and password or cookies or chromium profile path.")
-        self.driver = new_driver() self.email = email
-        self.password = password
-        self.absolute_chromium_profile_path = absolute_chromium_profile_path
-        self.cookies = cookies
-        
+    email: Optional[str] = None
+    password: Optional[str] = None
+    absolute_chromium_profile_path: Optional[str] = None
+    cookies: Optional[list] = None
+    
+    def __post_init__(self):
+        if self.email is None and self.password is None and self.absolute_chromium_profile_path is None and self.cookies is None:
+            raise Exception("Please provide either email and password or cookies and absolute_chromium_profile_path.")
+        self.driver = new_driver()  # Assuming new_driver() is defined somewhere
         self.sign_in()
 
     def sign_in(self):
@@ -351,15 +348,17 @@ class Youtube:
         self.driver = result['driver']
         return result
 
+@dataclass
+class YoutubeData:
     def get_all_video_stats_from_channel(
         self,
-        channel_id,
+        channel_handle: str,
     ):
         """
         Function to get all video stats and some extra information about the video, from a specific channel.
 
         Parameters:
-        - channel_id (str): channel id of the channel to get all video stats from.
+        - channel_handle (str): channel handle of the channel to get all video stats from.
 
         Returns:
         - example success return object: {
@@ -442,5 +441,5 @@ class Youtube:
             "error": str(e),
         }
         """
-        result = youtube.get_all_video_stats_from_channel(channel_id)
+        result = youtube.get_all_video_stats_from_channel(channel_handle)
         return result
