@@ -16,12 +16,10 @@ class TestListAllChannels(unittest.TestCase):
             self.skipTest("Test email and password not provided")
 
         youtube = Youtube(email=test_email, password=test_password)
-        # Test the create_channel function with valid inputs
         result = youtube.list_all_channels()
 
         if result:
             print(result)
-            # Assert that the channel was created successfully
             self.assertEqual(result["status"], "success")
         else:
             raise Exception("Channel listing failed, result is None")

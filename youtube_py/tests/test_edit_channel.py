@@ -21,7 +21,6 @@ class TestEditChannel(unittest.TestCase):
             self.skipTest("Test email and password not provided")
 
         youtube = Youtube(email=test_email, password=test_password)
-        # Test the create_channel function with valid inputs
         result = youtube.edit_channel(
             channel_name="Adonis Jamal",
             channel_handle="jamal283492857",
@@ -35,7 +34,6 @@ class TestEditChannel(unittest.TestCase):
 
         if result:
             print(result)
-            # Assert that the channel was created successfully
             self.assertEqual(result["message"], "Channel edited successfully")
             self.assertIsNotNone(result["channel_id"])
             self.assertIsNotNone(result["channel_name"])

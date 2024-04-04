@@ -1,7 +1,5 @@
 import unittest
 from classes import YoutubeData 
-from dotenv import load_dotenv
-import os
 
 class TestGetChannelID(unittest.TestCase):
 

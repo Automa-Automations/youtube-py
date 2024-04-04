@@ -10,9 +10,7 @@ test_password = os.getenv("TEST_PASSWORD") or ""
 
 class TestDeleteSubChannel(unittest.TestCase):
 
-    def test_create_video_success(self):
-        # Calling the create_video function with valid parameters
-
+    def test_delete_sub_channel_success(self):
         youtube = Youtube(email=test_email, password=test_password)
         youtube.switch_to_sub_channel("Jack S")
 

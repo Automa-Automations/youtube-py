@@ -10,15 +10,14 @@ test_password = os.getenv("TEST_PASSWORD")
 
 class TestGetMyVideosStats(unittest.TestCase):
 
-    def test_edit_channel_success(self):
+    def get_my_videos_stats_success(self):
 
         youtube = Youtube(email=test_email, password=test_password)
         result = youtube.get_my_videos_stats()
         if result:
-            # Assert that the channel was created successfully
             self.assertEqual(result["status"], "success")
             self.assertIsNotNone(result["video_stats"])
         else:
-            raise Exception("Channel edit failed, result is None")
+            raise Exception("Getting my video stats failed, result is None")
 
         youtube.close()

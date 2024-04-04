@@ -24,7 +24,6 @@ class TestEditSubChannel(unittest.TestCase):
         youtube.switch_to_sub_channel(
             "Adonis Here"
         )
-        # Test the create_channel function with valid inputs
         result = youtube.edit_channel(
             channel_name="Adonis Jamal",
             channel_handle="jamal283492857",
@@ -38,7 +37,6 @@ class TestEditSubChannel(unittest.TestCase):
 
         if result:
             print(result)
-            # Assert that the channel was created successfully
             self.assertEqual(result["message"], "Channel edited successfully")
             self.assertIsNotNone(result["channel_id"])
             self.assertIsNotNone(result["channel_name"])
