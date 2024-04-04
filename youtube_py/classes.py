@@ -461,7 +461,6 @@ class Youtube:
         result = youtube.get_my_channel_handle(self.driver)
         self.driver = result['driver']
         return result
-
 @dataclass
 class YoutubeData:
     def get_all_video_stats_from_channel(
@@ -604,4 +603,28 @@ class YoutubeData:
         }
         """
         result = youtube.get_video_stats(video_id)
+        return result
+    
+    def get_channel_stats(
+        self,
+        channel_id: str,
+    ):
+        """
+        Function to get channel stats of the channel.
+
+        Parameters:
+        - channel_id (str): channel id of the channel to get stats from.
+
+        Returns:
+        - example success return object: {
+            "status": "success",
+            "channel_stats": channel_stats
+        }
+        - example error return object: {
+            "status": "error",
+            "messsage": "Error getting channel stats.",
+            "error": str(e),
+        }
+        """
+        result = youtube.get_channel_stats(channel_id)
         return result
