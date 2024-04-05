@@ -1,2 +1,5 @@
 venv/
 .env
+dist/
+youtube_selenium_py.egg-info/
+build/
