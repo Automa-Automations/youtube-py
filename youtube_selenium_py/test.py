@@ -1,4 +1,4 @@
-import tests 
+import youtube_selenium_py.tests as tests
 import unittest
 
 tests = {
