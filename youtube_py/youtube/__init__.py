@@ -1,4 +1,5 @@
 # All methods for Youtube class:
+from youtube.sign_into_youtube_channel import sign_into_youtube_channel
 from youtube.create_channel import create_channel
 from youtube.create_video import create_video 
 from youtube.create_community_post import create_community_post
@@ -17,3 +18,4 @@ from youtube.get_video_stats import get_video_stats
 from youtube.get_channel_stats import get_channel_stats
 from youtube.download_video import download_video 
 from youtube.download_thumbnail import download_thumbnail
+

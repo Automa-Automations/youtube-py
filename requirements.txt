@@ -1,4 +1,4 @@
 undetected_chromedriver
 selenium
-dotenv
 python-dotenv
+pytube

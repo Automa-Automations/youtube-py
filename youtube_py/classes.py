@@ -1,6 +1,6 @@
 from typing import Optional, List
 import youtube 
-from utils import sign_into_youtube_channel, new_driver
+from utils import new_driver
 from dataclasses import dataclass
 
 @dataclass
@@ -17,7 +17,7 @@ class Youtube:
         self.sign_in()
 
     def sign_in(self):
-        driver = sign_into_youtube_channel(self.driver, self.email, self.password, self.cookies, self.absolute_chromium_profile_path)
+        driver = youtube.sign_into_youtube_channel(self.driver, self.email, self.password, self.cookies, self.absolute_chromium_profile_path)
         # Set class driver to driver
         self.driver = driver
     

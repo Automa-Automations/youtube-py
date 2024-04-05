@@ -7,7 +7,6 @@ load_dotenv()
 test_email = os.getenv("TEST_EMAIL") or ""
 test_password = os.getenv("TEST_PASSWORD") or ""
 
-
 class TestDeleteChannel(unittest.TestCase):
 
     def test_delete_channel_success(self):
