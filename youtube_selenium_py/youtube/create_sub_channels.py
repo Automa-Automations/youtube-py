@@ -1,7 +1,7 @@
 from typing import List
 import time
 from selenium.webdriver.common.by import By
-from utils import find_element
+from youtube_selenium_py.utils import find_element
 
 def create_sub_channels(
     driver,

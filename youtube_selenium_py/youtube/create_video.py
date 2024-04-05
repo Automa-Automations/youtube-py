@@ -1,7 +1,7 @@
 from typing import Optional
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from utils import find_element
+from youtube_selenium_py.utils import find_element
 import time
 
 def create_video(

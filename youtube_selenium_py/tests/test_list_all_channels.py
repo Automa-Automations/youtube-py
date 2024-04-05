@@ -1,6 +1,6 @@
 import unittest
 import os
-from classes import Youtube
+from youtube_selenium_py.classes import Youtube
 import time
 from dotenv import load_dotenv
 

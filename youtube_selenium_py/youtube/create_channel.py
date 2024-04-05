@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from utils import find_element
+from youtube_selenium_py.utils import find_element
 import time
 
 def create_channel(

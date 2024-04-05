@@ -1,6 +1,6 @@
 from typing import Optional
 import undetected_chromedriver as uc
-from utils import find_element
+from youtube_selenium_py.utils import find_element
 import time
 from selenium.webdriver.common.by import By
 

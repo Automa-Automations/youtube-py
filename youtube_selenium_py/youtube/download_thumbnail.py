@@ -1,5 +1,5 @@
 import requests
-from youtube import get_video_stats
+from youtube_selenium_py.youtube import get_video_stats
 
 def download_thumbnail(video_id, export_path, thumbnail_name):
     try:

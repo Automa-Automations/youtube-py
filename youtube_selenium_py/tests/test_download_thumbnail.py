@@ -1,5 +1,5 @@
 import unittest
-from classes import YoutubeData
+from youtube_selenium_py.classes import YoutubeData
 import os
 
 class TestDownloadThumbnail(unittest.TestCase):

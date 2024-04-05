@@ -1,7 +1,7 @@
 import requests
 import math
 import threading
-from youtube.get_channel_id import get_channel_id
+from youtube_selenium_py.youtube.get_channel_id import get_channel_id
 
 def all_videos_from_channel(channel_id):
 

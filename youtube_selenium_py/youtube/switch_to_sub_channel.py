@@ -1,6 +1,6 @@
 import time
 from selenium.webdriver.common.by import By
-from utils import find_element, find_elements
+from youtube_selenium_py.utils import find_element, find_elements
 
 def switch_to_sub_channel(
     driver,

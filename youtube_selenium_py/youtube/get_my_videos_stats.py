@@ -1,5 +1,5 @@
-from youtube.get_all_video_stats_from_channel import get_all_video_stats_from_channel
-from youtube.get_my_channel_handle import get_my_channel_handle
+from youtube_selenium_py.youtube.get_all_video_stats_from_channel import get_all_video_stats_from_channel
+from youtube_selenium_py.youtube.get_my_channel_handle import get_my_channel_handle
 
 def get_my_videos_stats(driver):
     try:

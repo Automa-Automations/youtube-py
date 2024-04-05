@@ -1,6 +1,6 @@
 from typing import Optional, List
-import youtube 
-from utils import new_driver
+import youtube_selenium_py.youtube as youtube
+from youtube_selenium_py.utils import new_driver
 from dataclasses import dataclass
 
 @dataclass

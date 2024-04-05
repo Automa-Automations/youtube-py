@@ -1,6 +1,6 @@
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from utils import find_element, scroll_to_bottom, set_element_innertext, gen_random_string
+from youtube_selenium_py.utils import find_element, scroll_to_bottom, set_element_innertext, gen_random_string
 import time
 
 def edit_channel(

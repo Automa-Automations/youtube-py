@@ -1,4 +1,4 @@
-from youtube.list_all_channels import list_all_channels
+from youtube_selenium_py.youtube.list_all_channels import list_all_channels
 
 def get_my_channel_handle(driver):
     try:
