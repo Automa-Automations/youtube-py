@@ -1,3 +1,4 @@
+from typing import Any, Dict
 import requests
 
 def get_video_stats(video_id: str):
@@ -6,7 +7,7 @@ def get_video_stats(video_id: str):
 
         response = requests.get(url)
         response_json = response.json()
-        video_stats = response_json['items'][0]
+        video_stats : Dict[Any, Any] = response_json['items'][0]
         print("Successfully fetched video statistics.")
 
         return {

@@ -710,3 +710,34 @@ class YoutubeData:
         """
         result = youtube.download_video(video_id, absolute_path, filename)
         return result
+    
+    def download_thumbnail(
+        self,
+        video_id: str, 
+        export_path: str, 
+        thumbnail_name: str
+    ):
+        """
+        Function to download thumbnail of a video from youtube, and save to specified absolute path.
+
+        Parameters:
+        - video_id (str): video id of the video to download thumbnail from.
+        - export_path (str): absolute path to save the downloaded thumbnail.
+        - thumbnail_name (str): name of the thumbnail to save as.
+
+        Returns:
+        - example success return object: {
+            "status": "success",
+            "message": "Thumbnail downloaded successfully.",
+        }
+        - example error return object: {
+            "status": "error",
+            "message": "Error downloading thumbnail.",
+            "error": str(e),
+        }
+        """
+        # # Download thumbnail and save to absolute path
+        result = youtube.download_thumbnail(video_id, export_path, thumbnail_name)
+        return result
+
+
