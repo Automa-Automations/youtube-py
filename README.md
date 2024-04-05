@@ -122,7 +122,7 @@ yt.close()
 
 ## Documentation
 
-Refer to the provided documentation for detailed usage instructions, method descriptions, and return formats.
+Refer to the provided <a href="https://docs.agnostica.site">documentation</a> for detailed usage instructions, method descriptions, and return formats.
 
 ---
 
