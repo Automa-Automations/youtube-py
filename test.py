@@ -1,4 +1,4 @@
-import youtube_selenium_py.tests as tests
+import tests
 import unittest
 
 tests = {
@@ -42,4 +42,6 @@ def main():
     test = unittest.TestLoader().loadTestsFromTestCase(test)
     unittest.TextTestRunner().run(test)
 
-main()
+
+if __name__ == "__main__":
+    main()

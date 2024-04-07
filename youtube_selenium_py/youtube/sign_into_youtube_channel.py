@@ -57,7 +57,7 @@ def sign_into_youtube_channel(
             next_button = find_element(driver, By.XPATH, "//button[contains(span/text(), 'Next')]")
             next_button.click()
 
-            print("Implicitly sleeping for 20 seconds, if your account has two setp authentication, or asking for verification code...")
+            print("Implicitly sleeping for 20 seconds, if your account has two step authentication, or asking for verification code...")
             time.sleep(20)
             return driver
         else:
