@@ -64,7 +64,7 @@ def sign_into_youtube_channel(
             raise Exception("You must provide either an email and password, chromium driver path, or cookies.")
 
     except Exception as e:
-        print("Error signing into youtube channel: ", e)
+        print("Error signing into youtube channel are you sure you passed in valid parameters? ", e)
 
         with open("error.txt", "w") as f:
             f.write(str(e))

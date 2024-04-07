@@ -10,7 +10,7 @@ test_password = os.getenv("TEST_PASSWORD")
 
 class TestCreateCommunityPost(unittest.TestCase):
 
-    def test_text_post(self):
+    def test_text_post_success(self):
 
         youtube = Youtube(email=test_email, password=test_password)
         result = youtube.create_community_post(
@@ -18,6 +18,28 @@ class TestCreateCommunityPost(unittest.TestCase):
             schedule={
                 "date": "Apr 5, 2024",
                 "time": "6:45 PM", # Only 15 minute increments (hour:0, hour:15, hour: 30, hour: 45)
+                "GMT_timezone": "GMT-7" # Timezone of the schedule (GMT only)
+            },
+        )
+        self.assertEqual(result['status'], 'success')
+        youtube.close()
+
+    def test_text_post_no_schedule(self):
+
+        youtube = Youtube(email=test_email, password=test_password)
+        result = youtube.create_community_post(
+            community_post_title="Hello there!",
+        )
+        self.assertEqual(result['status'], 'success')
+        youtube.close()
+
+    def test_text_post_fail(self):
+
+        youtube = Youtube(email=test_email, password=test_password)
+        result = youtube.create_community_post(
+            community_post_title="Hello everyone, how is it going?",
+            schedule={
+                "date": "Apr 5, 2024",
                 "GMT_timezone": "GMT-7" # Timezone of the schedule (GMT only)
             },
         )
