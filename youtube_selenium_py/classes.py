@@ -12,14 +12,21 @@ class Youtube:
     
     def __post_init__(self):
         if self.email is None and self.password is None and self.absolute_chromium_profile_path is None and self.cookies is None:
-            raise Exception("Please provide either email and password or cookies and absolute_chromium_profile_path.")
+            raise Exception("Please provide either email and password, or cookies, or absolute_chromium_profile_path.")
         self.driver = new_driver()  # Assuming new_driver() is defined somewhere
         self.sign_in()
 
     def sign_in(self):
-        driver = youtube.sign_into_youtube_channel(self.driver, self.email, self.password, self.cookies, self.absolute_chromium_profile_path)
-        # Set class driver to driver
-        self.driver = driver
+        result = youtube.sign_into_youtube_channel(self.driver, self.email, self.password, self.cookies, self.absolute_chromium_profile_path)
+        if result:
+            self.driver = result['driver']
+            self.sign_in_result = {
+                "status": result['status'],
+                "message": result["message"],
+                "driver": self.driver,
+            }
+            if 'error' in result:
+                self.sign_in_result['error'] = result['error']
     
     def create_channel(
         self, 

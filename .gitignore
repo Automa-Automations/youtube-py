@@ -3,3 +3,4 @@ venv/
 dist/
 youtube_selenium_py.egg-info/
 build/
+cookies.json
