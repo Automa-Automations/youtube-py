@@ -1,4 +1,4 @@
-# youtube_selenium_py
+# Youtube Automation Python Package using Selenium
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Python Version](https://img.shields.io/badge/python-3.6%2B-blue.svg)](https://www.python.org/downloads/) [![PyPI Version](https://img.shields.io/pypi/v/youtube_selenium_py.svg)](https://discord.gg/hBufFtWQmy)
 
