@@ -2,11 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Python Version](https://img.shields.io/badge/python-3.6%2B-blue.svg)](https://www.python.org/downloads/) [![PyPI Version](https://img.shields.io/pypi/v/youtube_selenium_py.svg)](https://discord.gg/hBufFtWQmy)
 
-![PIXLR Private API](https://github.com/Automa-Automations/youtube_selenium_py/assets/141557971/72e93b18-12fc-4cbc-81a8-e7ceca85b141)
-
 **youtube_selenium_py** is a Python package that simplifies interactions with YouTube using Selenium.
-
-(Video iframe, title: "Youtube Selenium Py | Automate Youtube with Selenium and Python)
 
 ---
 
